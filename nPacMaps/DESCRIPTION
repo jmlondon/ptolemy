@@ -1,0 +1,12 @@
+Package: nPacMaps
+Maintainer: Josh M London <josh.london@noaa.gov>
+License: public domain
+Title: North Pacific Maps Package
+Type: Package
+LazyLoad: no
+Author: Josh M London
+Description: This package contains the map data files for the North Pacific
+Version: 1.0
+Date: 2011-11-20
+Collate:
+    ''
