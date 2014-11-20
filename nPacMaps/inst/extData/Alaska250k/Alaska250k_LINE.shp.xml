@@ -1,0 +1,433 @@
+<metadata>
+  <idinfo>
+    <citation>
+      <citeinfo>
+        <origin>Alaska Department of Natural Resources, Land Records Information Section</origin>
+        <pubdate>20130303</pubdate>
+        <title>Alaska Coastline 1:250,000</title>
+        <geoform>vector digital data</geoform>
+        <onlink>http://dnr.alaska.gov/SpatialUtility/SUC?cmd=extract&amp;layerid=58</onlink>
+      </citeinfo>
+    </citation>
+    <descript>
+      <abstract>This coastline coverage of Alaska represents a collective effort
+by many organizations over the course of the last 15 years.  It began
+as a digital pen-up-pen-down file from the Department of Natural
+Resources Division of Oil &amp; Gas and was generated into an ARC coverage by
+the North Slope Borough.  At that point several agencies --
+spearheaded by NOAA -- cooperated to have the remainder of the coastline
+digitized at the scale of 1:250000.  Ninety percent of the features in the
+coverage are very close to the Alaska coastline because NOAA had no
+interest in covering the whole state with stream and lake information
+at the original time of data capture.
+
+Our version of the Alaska coastline originated with the North
+Slope Borough who gave this coverage to EROS on 3-7-89.  At EROS many
+edits and improvements were made to the coastline coverage.  The State
+of Alaska Department of Natural Resources received this edited
+coverage from EROS on 7-29-92 and has continued to make cartographic
+improvements to the coverage.</abstract>
+      <purpose>For typical GIS purposes of a general coastline.  Do not use
+for navigation.</purpose>
+      <supplinf>Revisions:
+Among the most notable corrections made by DNR:
+1) placement of the Copper River (July 1992)
+2) coding changes for Baird Inlet -- Selawik Lake (July 1993)
+3) deletion of extraneous islands in the Aleutians
+4) repositioning US/Canadian border to 141 degrees west longitude
+(January 1994)
+5) coding changes for Walapka Bay (February 1994)
+6) coding changes for Selawik Lake and coastline near Wainwright
+(June July August 1994)
+
+4/19/95 K Zeiner
+Replaced the Canadian border in southeast with the border from the
+TWPSPOLY.
+
+5/4/95 K Zeiner
+Added an island to the coastline per Dorothy Mortenson.  Buldir
+Island--located in the Aleutian chain.
+
+Related_Spatial_and_Tabular_Data_Sets:
+LUT:  ALASKA.AFRQ
+FREQUENCY  CODE     LENGTH        DESC           CODEC
+1  4370    50.200 65157860.000 COASTLINE         C
+2   213    50.202   121971.300 CLOSURE LINE      CL
+3  2509    50.412 18472760.000 STREAM            S
+4  1178    50.421 10741410.000 LAKE              L
+5    45    90.197  2180206.000 CANADIAN BORDER   CB
+
+Notes:
+Projection: Albers
+Date Received: 7/28/92
+Verified: J. Tam  7/29/92
+Documented by: J. Tam  7/29/92
+This coverage has a fuzzy tolerance of 0.100.
+Cleaned up labelerrors; deleted incorrect Copper River - 7/31/92
+Changed codec for Baird Inlet from S to C so it will draw on
+our base maps - J. Tam - 7/14/93
+Coverage converted from pre-7.0 to Arc/Info 8.x to recover projection
+file. Work performed by D. Seamount. 4/18/2003.</supplinf>
+    </descript>
+    <timeperd>
+      <timeinfo>
+        <sngdate>
+          <caldate>20130303</caldate>
+        </sngdate>
+        <rngdates>
+          <begdate>1950</begdate>
+          <enddate>1980</enddate>
+        </rngdates>
+      </timeinfo>
+      <current>publication date</current>
+    </timeperd>
+    <status>
+      <progress>Complete</progress>
+      <update>None planned</update>
+    </status>
+    <spdom>
+      <bounding>
+        <westbc>-187.555411444188</westbc>
+        <eastbc>-129.995445973875</eastbc>
+        <northbc>71.3916136670564</northbc>
+        <southbc>51.2157571938332</southbc>
+      </bounding>
+    </spdom>
+    <keywords>
+      <theme>
+        <themekt>ISO 19115 Topic Category</themekt>
+        <themekey>imageryBaseMapsEarthCover</themekey>
+      </theme>
+      <theme>
+        <themekt>none</themekt>
+        <themekey>coast</themekey>
+        <themekey>coastline</themekey>
+        <themekey>shore</themekey>
+        <themekey>shoreline</themekey>
+        <themekey>alaska</themekey>
+      </theme>
+      <place>
+        <placekt>none</placekt>
+        <placekey>Alaska</placekey>
+      </place>
+    </keywords>
+    <accconst>To ensure distribution of the most current public information, please
+refer requests for data or products to the Alaska Department of
+Natural Resources, Land Records Information Section.</accconst>
+    <useconst>It is not recommended the data be used at a scale larger
+than 1:250,000.
+
+Any hardcopies or published datasets utilizing these data sets shall
+clearly indicate their source.  If the user has modified the data in any
+way they are obligated to describe the types of modifications they
+have performed.  User specifically agrees not to misrepresent
+these data sets, nor to imply that changes they made were
+approved by the Alaska Department of Natural Resources.</useconst>
+    <ptcontac>
+      <cntinfo>
+        <cntperp>
+          <cntper>GIS Public Access Coordinator</cntper>
+          <cntorg>AK Department of Natural Resources - Land Records
+Information Section</cntorg>
+        </cntperp>
+        <cntpos>GIS Public Access Coordinator</cntpos>
+        <cntaddr>
+          <addrtype>mailing and physical address</addrtype>
+          <address>550 W. 7th Suite 706</address>
+          <city>Anchorage</city>
+          <state>AK</state>
+          <postal>99501</postal>
+          <country>USA</country>
+        </cntaddr>
+        <cntvoice>907 269 8833</cntvoice>
+        <cntfax>907 269 8920</cntfax>
+        <cntemail>gis_public_access@dnr.state.ak.us</cntemail>
+        <hours>800-1600 AST</hours>
+        <cntinst>See Distribution_Information</cntinst>
+      </cntinfo>
+    </ptcontac>
+    <datacred>NOAA, USGS/EROS, ADNR-DOG, North Slope Borough</datacred>
+  </idinfo>
+  <dataqual>
+    <attracc>
+      <attraccr>See Supplemental_Information: Revisions:</attraccr>
+    </attracc>
+    <logic>Polygon and chain-node topology present.</logic>
+    <complete>See Supplemental_Information: Revisions:</complete>
+    <posacc>
+      <horizpa>
+        <horizpar>See Supplemental_Information: Revisions:</horizpar>
+      </horizpa>
+    </posacc>
+    <lineage>
+      <srcinfo>
+        <srccite>
+          <citeinfo>
+            <origin>USGS</origin>
+            <pubdate>1950-1980</pubdate>
+            <title>QMQ hydrography</title>
+            <serinfo>
+              <sername>DLG</sername>
+              <issue>hydrography</issue>
+            </serinfo>
+            <pubinfo>
+              <pubplace>Reston, Virginia</pubplace>
+              <publish>USGS</publish>
+            </pubinfo>
+          </citeinfo>
+        </srccite>
+        <srcscale>250000</srcscale>
+        <typesrc>web</typesrc>
+        <srctime>
+          <timeinfo>
+            <rngdates>
+              <begdate>1950</begdate>
+              <enddate>1980</enddate>
+            </rngdates>
+          </timeinfo>
+          <srccurr>ground condition</srccurr>
+        </srctime>
+        <srccitea>none</srccitea>
+        <srccontr>Selected coastline information where needed
+and where available.  Also used other sources.  See Abstract.</srccontr>
+      </srcinfo>
+      <procstep>
+        <procdesc>See Abstract and Supplemental_Information</procdesc>
+        <procdate>1984</procdate>
+      </procstep>
+      <procstep>
+        <procdesc>ALASKA coverage imported into geodatabase.</procdesc>
+        <procdate>unknown</procdate>
+      </procstep>
+      <procstep>
+        <procdesc>Feature class data copied to materialized view.</procdesc>
+        <procdate>20051010</procdate>
+      </procstep>
+      <procstep>
+        <procdesc>Materialized view data extracted and converted to Shape format.</procdesc>
+        <procdate>unknown</procdate>
+      </procstep>
+    </lineage>
+  </dataqual>
+  <spdoinfo>
+    <direct>Vector</direct>
+    <ptvctinf>
+      <sdtsterm>
+        <sdtstype>String</sdtstype>
+        <ptvctcnt>8429</ptvctcnt>
+      </sdtsterm>
+    </ptvctinf>
+  </spdoinfo>
+  <spref>
+    <horizsys>
+      <planar>
+        <mapproj>
+          <mapprojn>Albers Conical Equal Area</mapprojn>
+          <albers>
+            <stdparll>55.000000</stdparll>
+            <stdparll>65.000000</stdparll>
+            <longcm>-154.000000</longcm>
+            <latprjo>50.000000</latprjo>
+            <feast>0.000000</feast>
+            <fnorth>0.000000</fnorth>
+          </albers>
+        </mapproj>
+        <planci>
+          <plance>coordinate pair</plance>
+          <coordrep>
+            <absres>0.000100</absres>
+            <ordres>0.000100</ordres>
+          </coordrep>
+          <plandu>meters</plandu>
+        </planci>
+      </planar>
+      <geodetic>
+        <horizdn>North American Datum of 1983</horizdn>
+        <ellips>Geodetic Reference System 80</ellips>
+        <semiaxis>6378137.000000</semiaxis>
+        <denflat>298.257222</denflat>
+      </geodetic>
+    </horizsys>
+  </spref>
+  <eainfo>
+    <detailed>
+      <enttyp>
+        <enttypl>Physical Features - Coast - Alaska Coast - 250,000</enttypl>
+        <enttypd>feature class</enttypd>
+        <enttypds>ESRI</enttypds>
+      </enttyp>
+      <attr>
+        <attrlabl>FID</attrlabl>
+        <attrdef>Internal feature number.</attrdef>
+        <attrdefs>ESRI</attrdefs>
+        <attrdomv>
+          <udom>Sequential unique whole numbers that are automatically generated.</udom>
+        </attrdomv>
+      </attr>
+      <attr>
+        <attrlabl>Shape</attrlabl>
+        <attrdef>Feature geometry.</attrdef>
+        <attrdefs>ESRI</attrdefs>
+        <attrdomv>
+          <udom>Coordinates defining the features.</udom>
+        </attrdomv>
+      </attr>
+      <attr>
+        <attrlabl>CODE</attrlabl>
+        <attrdef>Type of line</attrdef>
+        <attrdefs>unknown</attrdefs>
+        <attrdomv>
+          <edom>
+            <edomv>50.200</edomv>
+            <edomvd>COASTLINE</edomvd>
+            <edomvds>unknown</edomvds>
+          </edom>
+          <edom>
+            <edomv>50.202</edomv>
+            <edomvd>CLOSURE LINE</edomvd>
+            <edomvds>unknown</edomvds>
+          </edom>
+          <edom>
+            <edomv>50.412</edomv>
+            <edomvd>STREAM</edomvd>
+            <edomvds>unknown</edomvds>
+          </edom>
+          <edom>
+            <edomv>50.421</edomv>
+            <edomvd>LAKE</edomvd>
+            <edomvds>unknown</edomvds>
+          </edom>
+          <edom>
+            <edomv>90.197</edomv>
+            <edomvd>CANADIAN BORDER</edomvd>
+            <edomvds>unknown</edomvds>
+          </edom>
+        </attrdomv>
+      </attr>
+      <attr>
+        <attrlabl>GRID_CODE</attrlabl>
+        <attrdef>corresponds to code</attrdef>
+        <attrdefs>unknown</attrdefs>
+        <attrdomv>
+          <edom>
+            <edomv>alaska.afrq</edomv>
+            <edomvd>values from 1 to 5</edomvd>
+            <edomvds>unknown</edomvds>
+          </edom>
+        </attrdomv>
+      </attr>
+      <attr>
+        <attrlabl>CODEC</attrlabl>
+        <attrdef>corresponds to code values</attrdef>
+        <attrdefs>unknown</attrdefs>
+        <attrdomv>
+          <edom>
+            <edomv>C</edomv>
+            <edomvd>COASTLINE</edomvd>
+            <edomvds>unknown</edomvds>
+          </edom>
+          <edom>
+            <edomv>CL</edomv>
+            <edomvd>CLOSURE LINE</edomvd>
+            <edomvds>unknown</edomvds>
+          </edom>
+          <edom>
+            <edomv>S</edomv>
+            <edomvd>STREAM</edomvd>
+            <edomvds>unknown</edomvds>
+          </edom>
+          <edom>
+            <edomv>L</edomv>
+            <edomvd>LAKE</edomvd>
+            <edomvds>unknown</edomvds>
+          </edom>
+          <edom>
+            <edomv>CB</edomv>
+            <edomvd>CANADIAN BORDER</edomvd>
+            <edomvds>unknown</edomvds>
+          </edom>
+        </attrdomv>
+      </attr>
+    </detailed>
+  </eainfo>
+  <distinfo>
+    <distrib>
+      <cntinfo>
+        <cntorgp>
+          <cntorg>Alaska Department of Natural Resources - Land Records Information Section</cntorg>
+        </cntorgp>
+        <cntpos>GIS Public Access Coordinator</cntpos>
+        <cntaddr>
+          <addrtype>mailing and physical address</addrtype>
+          <address>550 W. 7th Suite 706</address>
+          <city>Anchorage</city>
+          <state>AK</state>
+          <postal>99501</postal>
+          <country>USA</country>
+        </cntaddr>
+        <cntvoice>907 269 8833</cntvoice>
+        <cntfax>907 269 8920</cntfax>
+      </cntinfo>
+    </distrib>
+    <resdesc>Downloadable Data</resdesc>
+    <distliab>The State of Alaska makes no express or implied warranties (including warranties of merchantability
+and fitness) with respect to the character, function, or capabilities of the electronic services
+or products or their appropriateness for any users purposes. In no event will the State of Alaska
+be liable for any incidental, indirect, special, consequential or other damages suffered by the
+user or any other person or entity whether from the use of the electronic services or products,
+any failure thereof or otherwise, and in no event will the State of Alaska s liability to the
+requestor or anyone else exceed the fee paid for the electronic service or product.</distliab>
+    <stdorder>
+      <digform>
+        <digtinfo>
+          <formname>zipped shape file</formname>
+        </digtinfo>
+        <digtopt>
+          <onlinopt>
+            <computer>
+              <networka>
+                <networkr>http://dnr.alaska.gov/SpatialUtility/SUC?cmd=extract&amp;layerid=58</networkr>
+              </networka>
+            </computer>
+          </onlinopt>
+        </digtopt>
+      </digform>
+      <fees>none</fees>
+    </stdorder>
+  </distinfo>
+  <metainfo>
+    <metd>20080204</metd>
+    <metc>
+      <cntinfo>
+        <cntorgp>
+          <cntorg>AK Department of Natural Resources - Land Records Information Section</cntorg>
+        </cntorgp>
+        <cntpos>GIS Public Access Coordinator</cntpos>
+        <cntaddr>
+          <addrtype>mailing and physical address</addrtype>
+          <address>550 W. 7th Suite 706</address>
+          <city>Anchorage</city>
+          <state>AK</state>
+          <postal>99501</postal>
+          <country>USA</country>
+        </cntaddr>
+        <cntvoice>907 269 8833</cntvoice>
+        <cntfax>907 269 8920</cntfax>
+        <cntemail>gis_public_access@dnr.state.ak.us</cntemail>
+        <hours>800-1600 AST</hours>
+      </cntinfo>
+    </metc>
+    <metstdn>FGDC Content Standards for Digital Geospatial Metadata</metstdn>
+    <metstdv>FGDC-STD-001-1998</metstdv>
+    <mettc>local time</mettc>
+    <metuc>If the user has modified the data in any way they are obligated
+to describe the types of modifications they have performed in the
+supporting metadata file.  User specifically agrees not to imply
+that changes they made were approved by the Alaska Department of
+Natural Resources.</metuc>
+    <metextns>
+      <onlink>http://www.esri.com/metadata/esriprof80.html</onlink>
+      <metprof>ESRI Metadata Profile</metprof>
+    </metextns>
+  </metainfo>
+</metadata>
