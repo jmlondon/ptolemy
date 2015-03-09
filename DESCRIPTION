@@ -1,0 +1,18 @@
+Package: nPacMaps
+Maintainer: Josh M London <josh.london@noaa.gov>
+License: internal NOAA use only
+Title: North Pacific Maps Package
+Type: Package
+LazyData: true
+Authors@R: "Josh M London <josh.london@noaa.gov> [aut, cre]"
+Description: This package contains map data files (and some useful functions)
+    for the North Pacific
+Version: 1.1
+Date: 2014-11-20
+Depends:
+    maptools
+Imports:
+    rgeos,
+    sp,
+    ggplot2,
+    marmap
