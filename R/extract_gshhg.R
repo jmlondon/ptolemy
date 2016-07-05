@@ -28,28 +28,40 @@ extract_gshhg <- function(xlims,ylims,
   return(this_extract)
 }
 
+#' Bering Sea Map Region
+
 #' @rdname extract_gshhg
+#' @export
 bering <- function(...) {
   extract_gshhg(..., xlims = c(180 - 30,180 + 45),
                 ylims = c(35,75), resolution = "h",
                 epsg = "3571")
 }
 
+#' Alaska Map Region
+#' 
 #' @rdname extract_gshhg
+#' @export
 alaska <- function(...) {
   extract_gshhg(..., xlims = c(180 - 5,180 + 50),
                 ylims = c(35,75), resolution = "h",
                 epsg = "3338")
 }
 
+#' US Arctic Map Region
+#' 
 #' @rdname extract_gshhg
+#' @export
 us_arctic <- function(...) {
   extract_gshhg(..., xlims = c(180 - 2,180 + 50),
                 ylims = c(60,90), resolution = "h",
                 epsg = "3572")
 }
 
+#' North Pacific Map Region
+#' 
 #' @rdname extract_gshhg
+#' @export
 npac <- function(...) {
   extract_gshhg(..., xlims = c(180 - 50,180 + 70),
                 ylims = c(20,67), resolution = "i",
