@@ -29,6 +29,9 @@ extract_gshhg <- function(xlims,ylims,
 }
 
 #' Bering Sea Map Region
+#' 
+#' This map region is centered on the Bering Sea. Coordinates are returned in 
+#' the Lambert-Azimuthal Equal Area Bering Sea Projection (epsg:3571)
 
 #' @rdname extract_gshhg
 #' @export
@@ -40,6 +43,9 @@ bering <- function(...) {
 
 #' Alaska Map Region
 #' 
+#' This map region covers the extent of Alaska. Coordinates are returned in the
+#' Alaska Albers Projection (epsg:3338)
+#' 
 #' @rdname extract_gshhg
 #' @export
 alaska <- function(...) {
@@ -49,6 +55,11 @@ alaska <- function(...) {
 }
 
 #' US Arctic Map Region
+#' 
+#' This map region covers the US Arctic region centered on northern Alaska. The
+#' region extends into the Russian East Siberian Sea and the Eastern Beaufort 
+#' Sea of Canada. Coordinates are returned in the Lambert-Azimuthal Equal Area
+#' Alaska Projection (epsg:3572).
 #' 
 #' @rdname extract_gshhg
 #' @export
@@ -60,10 +71,29 @@ us_arctic <- function(...) {
 
 #' North Pacific Map Region
 #' 
+#' This map region covers the entire North Pacific Ocean from Hawaii in the
+#' south to the Bering Sea in the north. Coordinates are returned in the PDC
+#' Mercator Projection (epsg:3832)
+#' 
 #' @rdname extract_gshhg
 #' @export
 npac <- function(...) {
   extract_gshhg(..., xlims = c(180 - 50,180 + 70),
                 ylims = c(20,67), resolution = "i",
                 epsg = "3832")
+}
+
+#' California Current Map Region
+#' 
+#' This map region covers the California current off of the west coast of the 
+#' United States. The region extends from southern British Columbia, Canada to
+#' the Baja Peninsula of Mexico. Coordinates are returned in the California
+#' (Teale) Albers Projection (epsg:3310).
+#' 
+#' @rdname extract_gshhg
+#' @export
+calcur <- function(...) {
+  extract_gshhg(..., xlims = c(180 + 35,180 + 70),
+                ylims = c(26,52), resolution = "h",
+                epsg = "3310")
 }
