@@ -7,9 +7,17 @@
 getAKCRM.bathy(lon1, lon2, lat1, lat2, resolution = 0.4, keep = FALSE)
 }
 \arguments{
-\item{lon1}{}
+\item{lon1}{longitude 1}
 
-\item{keep}{}
+\item{lon2}{longitude 2}
+
+\item{lat1}{latitude 1}
+
+\item{lat2}{latitude 2}
+
+\item{resolution}{desired resolution}
+
+\item{keep}{to keep or not to keep}
 }
 \value{
 bathy class object
