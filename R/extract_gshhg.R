@@ -8,10 +8,9 @@
 #' @param epsg character indicating the numeric epsg value (e.g. "3571")
 #' @param fortify TRUE/FALSE whether to return a fortified data.frame for ggplot
 #'
-#' @return
+#' @return NULL
 #' @export
 #'
-#' @examples
 extract_gshhg <- function(xlims,ylims,
                           resolution = "h", epsg,
                           fortify = TRUE) {

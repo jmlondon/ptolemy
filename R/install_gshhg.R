@@ -1,9 +1,8 @@
 #' Download and Install GSHHG Binary Data
 #'
-#' @return
+#' @return NULL
 #' @export
 #'
-#' @examples
 install_gshhg <- function() {
   if (!dir.exists(system.file("extData", package = "nPacMaps"))) {
     dir.create(system.file("extData", package = "nPacMaps"))

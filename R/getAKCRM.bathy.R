@@ -6,12 +6,12 @@
 #' 24-arc second resolution dataset for Alaska. Unlike getNOAA.bathy(),
 #' the bounding box coordinates should be from 0-360
 #'
-#' @param lon1 
-#' @param lon2
-#' @param lat1
-#' @param lat2
-#' @param resolution
-#' @param keep 
+#' @param lon1 longitude 1
+#' @param lon2 longitude 2
+#' @param lat1 latitude 1
+#' @param lat2 latitude 2
+#' @param resolution desired resolution
+#' @param keep to keep or not to keep
 #' @return bathy class object
 #' @author Josh M London
 #' @export
