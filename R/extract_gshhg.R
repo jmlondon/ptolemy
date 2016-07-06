@@ -35,10 +35,14 @@ extract_gshhg <- function(xlims,ylims,
 
 #' @rdname extract_gshhg
 #' @export
-bering <- function(...) {
-  extract_gshhg(..., xlims = c(180 - 30,180 + 45),
-                ylims = c(35,75), resolution = "h",
-                epsg = "3571")
+bering <- function(xlims = c(180 - 30,180 + 45),
+                   ylims = c(35,75), resolution = "h",
+                   epsg = "3571", fortify = TRUE) {
+  extract_gshhg(xlims = xlims,
+                ylims = ylims, 
+                resolution = resolution,
+                epsg = epsg,
+                fortify = fortify)
 }
 
 #' Alaska Map Region
@@ -48,10 +52,14 @@ bering <- function(...) {
 #' 
 #' @rdname extract_gshhg
 #' @export
-alaska <- function(...) {
-  extract_gshhg(..., xlims = c(180 - 5,180 + 50),
-                ylims = c(35,75), resolution = "h",
-                epsg = "3338")
+alaska <- function(xlims = c(180 - 5,180 + 50),
+                   ylims = c(35,75), resolution = "h",
+                   epsg = "3338", fortify = TRUE) {
+  extract_gshhg(xlims = xlims,
+                ylims = ylims, 
+                resolution = resolution,
+                epsg = epsg,
+                fortify = fortify)
 }
 
 #' US Arctic Map Region
@@ -63,10 +71,14 @@ alaska <- function(...) {
 #' 
 #' @rdname extract_gshhg
 #' @export
-us_arctic <- function(...) {
-  extract_gshhg(..., xlims = c(180 - 2,180 + 50),
-                ylims = c(60,90), resolution = "h",
-                epsg = "3572")
+us_arctic <- function(xlims = c(180 - 2,180 + 50),
+                      ylims = c(60,90), resolution = "h",
+                      epsg = "3572", fortify = TRUE) {
+  extract_gshhg(xlims = xlims,
+                ylims = ylims, 
+                resolution = resolution,
+                epsg = epsg,
+                fortify = fortify)
 }
 
 #' North Pacific Map Region
@@ -77,10 +89,14 @@ us_arctic <- function(...) {
 #' 
 #' @rdname extract_gshhg
 #' @export
-npac <- function(...) {
-  extract_gshhg(..., xlims = c(180 - 50,180 + 70),
-                ylims = c(20,67), resolution = "i",
-                epsg = "3832")
+npac <- function(xlims = c(180 - 50,180 + 70),
+                 ylims = c(20,67), resolution = "i",
+                 epsg = "3832", fortify = TRUE) {
+  extract_gshhg(xlims = xlims,
+                ylims = ylims, 
+                resolution = resolution,
+                epsg = epsg,
+                fortify = fortify)
 }
 
 #' California Current Map Region
@@ -92,8 +108,12 @@ npac <- function(...) {
 #' 
 #' @rdname extract_gshhg
 #' @export
-calcur <- function(...) {
-  extract_gshhg(..., xlims = c(180 + 35,180 + 70),
-                ylims = c(26,52), resolution = "h",
-                epsg = "3310")
+calcur <- function(xlims = c(180 + 35,180 + 70),
+                   ylims = c(26,52), resolution = "h",
+                   epsg = "3310", fortify = TRUE) {
+  extract_gshhg(xlims = xlims,
+                ylims = ylims, 
+                resolution = resolution,
+                epsg = epsg,
+                fortify = fortify)
 }
