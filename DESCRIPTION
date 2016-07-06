@@ -1,12 +1,15 @@
 Package: nPacMaps
 Maintainer: Josh M London <josh.london@noaa.gov>
 License: CC0
-Title: North Pacific Maps Package
+Title: North Pacific Maps
 Type: Package
 LazyData: true
 Authors@R: "Josh M London <josh.london@noaa.gov> [aut, cre]"
-Description: This package contains map data files (and some useful functions)
-    for the North Pacific based on data from the GSHHG
+Description: This package contains functions for creating basemap polygons
+    for the North Pacific based on data from the Global Self-consistent, 
+    Hierarchical, High-resolution Geography (GSHHG) database. A separate
+    download of the GSHHG binary files from 
+    https://www.soest.hawaii.edu/pwessel/gshhg/ is required.
 Version: 2.0
 Date: 2016-07-05
 Imports:
