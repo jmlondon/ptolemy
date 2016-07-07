@@ -9,21 +9,21 @@
 \alias{us_arctic}
 \title{Extract Region from GSHHG}
 \usage{
-extract_gshhg(xlims, ylims, resolution = "h", epsg, fortify = TRUE)
+extract_gshhg(xlims, ylims, resolution = "i", epsg, fortify = TRUE)
 
-bering(xlims = c(180 - 30, 180 + 45), ylims = c(35, 75), resolution = "h",
+bering(xlims = c(180 - 30, 180 + 45), ylims = c(35, 75), resolution = "i",
   epsg = "3571", fortify = TRUE)
 
-alaska(xlims = c(180 - 5, 180 + 50), ylims = c(35, 75), resolution = "h",
+alaska(xlims = c(180 - 5, 180 + 50), ylims = c(35, 75), resolution = "i",
   epsg = "3338", fortify = TRUE)
 
 us_arctic(xlims = c(180 - 2, 180 + 50), ylims = c(60, 90),
-  resolution = "h", epsg = "3572", fortify = TRUE)
+  resolution = "i", epsg = "3572", fortify = TRUE)
 
 npac(xlims = c(180 - 50, 180 + 70), ylims = c(20, 67), resolution = "i",
   epsg = "3832", fortify = TRUE)
 
-calcur(xlims = c(180 + 35, 180 + 70), ylims = c(26, 52), resolution = "h",
+calcur(xlims = c(180 + 35, 180 + 70), ylims = c(26, 52), resolution = "i",
   epsg = "3310", fortify = TRUE)
 }
 \arguments{
