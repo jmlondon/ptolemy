@@ -51,7 +51,10 @@ npac_plot <- ggplot() +
   geom_polygon(data = npac_base,
                aes(x = long,y = lat,group = group,id = id),
                fill = "grey60") +
-  coord_fixed()
+  coord_fixed() +
+  xlab("easting (km)") + ylab("northing (km)") +
+  scale_x_continuous(labels = nPacMaps::to_km()) +
+  scale_y_continuous(labels = nPacMaps::to_km())
 npac_plot
 ```
 
@@ -67,7 +70,10 @@ ak_plot <- ggplot() +
   geom_polygon(data = ak_base,
                aes(x = long,y = lat,group = group,id = id),
                fill = "grey60") +
-  coord_fixed()
+  coord_fixed() +
+  xlab("easting (km)") + ylab("northing (km)") +
+  scale_x_continuous(labels = nPacMaps::to_km()) +
+  scale_y_continuous(labels = nPacMaps::to_km())
 ak_plot
 ```
 
@@ -91,7 +97,7 @@ harborSeal <- sp::spTransform(harborSeal, CRS("+init=epsg:3338"))
 harborSeal <- as.data.frame(harborSeal)
 
 map_limits <- nPacMaps::ggExpansion(harborSeal,x = "longitude",y = "latitude",
-                                    x_fac = 1, y_fac = 1)
+                                    x_fac = 0.25, y_fac = 0.25)
 
 ak_base <- nPacMaps::alaska()
 
@@ -101,7 +107,10 @@ ak_plot <- ggplot() +
                fill = "grey60") +
   geom_point(data = harborSeal,aes(x = longitude, y = latitude), 
              alpha = 0.1, color = 'blue') +
-  coord_fixed(xlim = map_limits$xlim, ylim = map_limits$ylim)
+  coord_fixed(xlim = map_limits$xlim, ylim = map_limits$ylim) +
+  xlab("easting (km)") + ylab("northing (km)") +
+  scale_x_continuous(labels = nPacMaps::to_km()) +
+  scale_y_continuous(labels = nPacMaps::to_km())
 ak_plot
 ```
 
