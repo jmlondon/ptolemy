@@ -16,7 +16,17 @@ knitr::opts_chunk$set(
 
 ## About
 
-executive summary of the package and functions
+Creating maps for the North Pacific can be difficult, frustrating, and confusing.
+The main source of this frustration is the 180 longitude line and the limited
+examples that exist for guidance. This R package relies on data from the [Global 
+Self-consistent, Hierarchical, High-resolution Geography (GSHHG) Database](https://www.soest.hawaii.edu/pwessel/gshhg/).
+
+The main objective is to provide a simple interface for quickly loading basemap
+polygon land data for the North Pacific Region that can be used in either the
+ggplot2 or sp:spplot graphical ecosystems.
+
+This package is under active development and functionality is subject to change
+and improvement at anytime.
 
 ## Installation
 
