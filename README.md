@@ -25,6 +25,34 @@ library(nPacMaps)
 install_gshhg()
 ```
 
+Resolution
+----------
+
+The GSHHG dataset has five different resolutions available:
+
+1.  **f**ull resolution: Original (full) data resolution.
+2.  **h**igh resolution: About 80 % reduction in size and quality.
+3.  **i**ntermediate resolution: Another ~80 % reduction.
+4.  **l**ow resolution: Another ~80 % reduction.
+5.  **c**rude resolution: Another ~80 % reduction.
+
+The **i**ntermediate reolustion has been set as the default option and should suffice for most applications. The default resolution can be overided via the `resolution` parameter. Users should consider bumping up to **h**igh or **f**ull when zooming into smaller scale regions. This will increase the extraction and drawing time. If you require the **f**ull resolution frequently, creating a custom region via `extract_gshhg()` should be considered.
+
+Projections
+-----------
+
+All of the returned maps are provide with projected coordinates in a default projection chosen for each region. In most cases, the default projections are sensible and all users need to do is insure all other data is transformed to the same projection. A custom projection can be provided by specifying the corresponding epsg integer value (as a character) to the `epsg` parameter.
+
+Fortify for ggplot2
+-------------------
+
+By default all of the basemap objects are returned as a `data.frame` that has been *fortified* via the `ggplot2::fortify()` function. If you would like, instead, for the object to be returned as a *SpatialPolygonsDataFrame* for use with `plot()` or `sp::spplot()` then the `fortify` parameter should be specified as `FALSE`.
+
+Additional Utility Functions
+----------------------------
+
+The package also includes two additional utility functions: `to_km()` and `ggExpansion()`. The `to_km()` function provides simple conversion of the easting and northing labels from meters to kilometers. The `ggExpansion()` function allows the user to easily specify an expansion fraction for the xlim and ylim components of the ggplot.
+
 Examples
 --------
 
@@ -51,11 +79,84 @@ npac_plot <- ggplot() +
   coord_fixed() +
   xlab("easting (km)") + ylab("northing (km)") +
   scale_x_continuous(labels = nPacMaps::to_km()) +
-  scale_y_continuous(labels = nPacMaps::to_km())
+  scale_y_continuous(labels = nPacMaps::to_km()) +
+  ggtitle('North Pacific Basemap (epsg:3832)')
 npac_plot
 ```
 
 ![](README-npac-example-1.png)
+
+### California Current
+
+``` r
+library(ggplot2)
+library(nPacMaps)
+
+calcur_base <- nPacMaps::calcur()
+#> Data are polygon data
+#> Rgshhs: clipping 8 of 471 polygons ...
+
+calcur_plot <- ggplot() + 
+  geom_polygon(data = calcur_base,
+               aes(x = long,y = lat,group = group,id = id),
+               fill = "grey60") +
+  coord_fixed() +
+  xlab("easting (km)") + ylab("northing (km)") +
+  scale_x_continuous(labels = nPacMaps::to_km()) +
+  scale_y_continuous(labels = nPacMaps::to_km()) +
+  ggtitle('California Current Basemap (epsg:3310)')
+calcur_plot
+```
+
+![](README-calcur-example-1.png)
+
+### Bering Sea Basemap
+
+``` r
+library(ggplot2)
+library(nPacMaps)
+
+bering_base <- nPacMaps::bering()
+#> Data are polygon data
+#> Rgshhs: clipping 9 of 1105 polygons ...
+
+bering_plot <- ggplot() + 
+  geom_polygon(data = bering_base,
+               aes(x = long,y = lat,group = group,id = id),
+               fill = "grey60") +
+  coord_fixed() +
+  xlab("easting (km)") + ylab("northing (km)") +
+  scale_x_continuous(labels = nPacMaps::to_km()) +
+  scale_y_continuous(labels = nPacMaps::to_km()) +
+  ggtitle('Bering Sea Basemap (epsg:3571)')
+bering_plot
+```
+
+![](README-bering-example-1.png)
+
+### US (Alaska) Arctic Basemap
+
+``` r
+library(ggplot2)
+library(nPacMaps)
+
+us_arctic_base <- nPacMaps::us_arctic()
+#> Data are polygon data
+#> Rgshhs: clipping 10 of 483 polygons ...
+
+us_arctic_plot <- ggplot() + 
+  geom_polygon(data = us_arctic_base,
+               aes(x = long,y = lat,group = group,id = id),
+               fill = "grey60") +
+  coord_fixed() +
+  xlab("easting (km)") + ylab("northing (km)") +
+  scale_x_continuous(labels = nPacMaps::to_km()) +
+  scale_y_continuous(labels = nPacMaps::to_km()) +
+  ggtitle('US Arctic Basemap (epsg:3572)')
+us_arctic_plot
+```
+
+![](README-us-arctic-example-1.png)
 
 ### Alaska Basemap
 
@@ -65,7 +166,7 @@ library(nPacMaps)
 
 ak_base <- nPacMaps::alaska()
 #> Data are polygon data
-#> Rgshhs: clipping 5 of 6791 polygons ...
+#> Rgshhs: clipping 5 of 1380 polygons ...
 
 ak_plot <- ggplot() + 
   geom_polygon(data = ak_base,
@@ -74,7 +175,8 @@ ak_plot <- ggplot() +
   coord_fixed() +
   xlab("easting (km)") + ylab("northing (km)") +
   scale_x_continuous(labels = nPacMaps::to_km()) +
-  scale_y_continuous(labels = nPacMaps::to_km())
+  scale_y_continuous(labels = nPacMaps::to_km()) +
+  ggtitle('Alaska Basemap (epsg:3338)')
 ak_plot
 ```
 
@@ -115,9 +217,9 @@ harborSeal <- as.data.frame(harborSeal)
 map_limits <- nPacMaps::ggExpansion(harborSeal,x = "longitude",y = "latitude",
                                     x_fac = 0.25, y_fac = 0.25)
 
-ak_base <- nPacMaps::alaska()
+ak_base <- nPacMaps::alaska(resolution = "f")
 #> Data are polygon data
-#> Rgshhs: clipping 5 of 6791 polygons ...
+#> Rgshhs: clipping 5 of 7494 polygons ...
 
 ak_plot <- ggplot() + 
   geom_polygon(data = ak_base,
