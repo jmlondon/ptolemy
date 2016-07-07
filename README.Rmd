@@ -1,0 +1,107 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, echo = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "README-"
+)
+```
+
+# nPacMaps: an R package for North Pacific basemap data
+
+## About
+
+executive summary of the package and functions
+
+## Installation
+
+The nPacMaps package is not available on CRAN and must be installed via the
+`devtools::install_github()` function.
+
+```{r, install-code, eval=FALSE}
+install.packages("devtools")
+devtools::install_github('jmlondon/npacmaps',ref='develop')
+```
+
+After successfully installing the package from GitHub, you will need to download
+and install the GSHGG data. This is handled via the `nPacMaps::install_gshhg()`
+function.
+
+```{r, install-gshgg, eval=FALSE}
+library(nPacMaps)
+install_gshhg()
+```
+
+## Examples
+
+### North Pacific Basemap
+
+```{r, npac-example}
+library(ggplot2)
+library(nPacMaps)
+
+npac_base <- nPacMaps::npac()
+
+npac_plot <- ggplot() + 
+  geom_polygon(data = npac_base,
+               aes(x = long,y = lat,group = group,id = id),
+               fill = "grey60") +
+  coord_fixed()
+npac_plot
+```
+
+### Alaska Basemap
+
+```{r, ak-example}
+library(ggplot2)
+library(nPacMaps)
+
+ak_base <- nPacMaps::alaska()
+
+ak_plot <- ggplot() + 
+  geom_polygon(data = npac_base,
+               aes(x = long,y = lat,group = group,id = id),
+               fill = "grey60") +
+  coord_fixed()
+ak_plot
+```
+
+We can also zoom in on a particular region
+
+```{r, ak-example-zoom}
+library(ggplot2)
+library(nPacMaps)
+library(crawl)
+library(dplyr)
+
+data("harborSeal")
+
+harborSeal <- harborSeal %>% filter(!is.na(latitude)) %>% 
+  as.data.frame()
+
+sp::coordinates(harborSeal) <- ~longitude + latitude
+sp::proj4string(harborSeal) <- CRS("+init=epsg:4326")
+
+harborSeal <- sp::spTransform(harborSeal, CRS("+init=epsg:3338"))
+harborSeal <- as.data.frame(harborSeal)
+
+map_limits <- nPacMaps::ggExpansion(harborSeal,x = "longitude",y = "latitude",
+                                    x_fac = 1, y_fac = 1)
+
+ak_base <- nPacMaps::alaska()
+
+ak_plot <- ggplot() + 
+  geom_polygon(data = ak_base,
+               aes(x = long,y = lat,group = group,id = id),
+               fill = "grey60") +
+  geom_point(data = harborSeal,aes(x = longitude, y = latitude), 
+             alpha = 0.1, color = 'blue') +
+  coord_fixed(xlim = map_limits$xlim, ylim = map_limits$ylim)
+ak_plot
+```
+
