@@ -12,7 +12,7 @@
 #' @export
 #'
 extract_gshhg <- function(xlims,ylims,
-                          resolution = "h", epsg,
+                          resolution = "i", epsg,
                           fortify = TRUE) {
   dir_path <- system.file("extData", package = "nPacMaps")
   file_name <- paste0("gshhs_",resolution,".b")
@@ -35,7 +35,7 @@ extract_gshhg <- function(xlims,ylims,
 #' @rdname extract_gshhg
 #' @export
 bering <- function(xlims = c(180 - 30,180 + 45),
-                   ylims = c(35,75), resolution = "h",
+                   ylims = c(35,75), resolution = "i",
                    epsg = "3571", fortify = TRUE) {
   extract_gshhg(xlims = xlims,
                 ylims = ylims, 
@@ -52,7 +52,7 @@ bering <- function(xlims = c(180 - 30,180 + 45),
 #' @rdname extract_gshhg
 #' @export
 alaska <- function(xlims = c(180 - 5,180 + 50),
-                   ylims = c(35,75), resolution = "h",
+                   ylims = c(35,75), resolution = "i",
                    epsg = "3338", fortify = TRUE) {
   extract_gshhg(xlims = xlims,
                 ylims = ylims, 
@@ -71,7 +71,7 @@ alaska <- function(xlims = c(180 - 5,180 + 50),
 #' @rdname extract_gshhg
 #' @export
 us_arctic <- function(xlims = c(180 - 2,180 + 50),
-                      ylims = c(60,90), resolution = "h",
+                      ylims = c(60,90), resolution = "i",
                       epsg = "3572", fortify = TRUE) {
   extract_gshhg(xlims = xlims,
                 ylims = ylims, 
@@ -108,7 +108,7 @@ npac <- function(xlims = c(180 - 50,180 + 70),
 #' @rdname extract_gshhg
 #' @export
 calcur <- function(xlims = c(180 + 35,180 + 70),
-                   ylims = c(26,52), resolution = "h",
+                   ylims = c(26,52), resolution = "i",
                    epsg = "3310", fortify = TRUE) {
   extract_gshhg(xlims = xlims,
                 ylims = ylims, 
