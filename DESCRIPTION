@@ -12,10 +12,11 @@ Description: This package contains functions for creating basemap polygons
     https://www.soest.hawaii.edu/pwessel/gshhg/ is required.
 Version: 2.0
 Date: 2016-07-05
+Depends:
+    maptools
 Imports:
     rgeos,
     sp,
     ggplot2,
-    marmap,
-    maptools
+    marmap
 RoxygenNote: 5.0.1
