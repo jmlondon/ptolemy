@@ -1,51 +1,48 @@
----
-output: github_document
----
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
+nPacMaps: an R package for North Pacific basemap data
+=====================================================
 
-```{r, echo = FALSE}
-knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>",
-  fig.path = "README-"
-)
-```
-
-# nPacMaps: an R package for North Pacific basemap data
-
-## About
+About
+-----
 
 executive summary of the package and functions
 
-## Installation
+Installation
+------------
 
-The nPacMaps package is not available on CRAN and must be installed via the
-`devtools::install_github()` function.
+The nPacMaps package is not available on CRAN and must be installed via the `devtools::install_github()` function.
 
-```{r, install-code, eval=FALSE}
+``` r
 install.packages("devtools")
 devtools::install_github('jmlondon/npacmaps',ref='develop')
 ```
 
-After successfully installing the package from GitHub, you will need to download
-and install the GSHGG data. This is handled via the `nPacMaps::install_gshhg()`
-function.
+After successfully installing the package from GitHub, you will need to download and install the GSHGG data. This is handled via the `nPacMaps::install_gshhg()` function.
 
-```{r, install-gshgg, eval=FALSE}
+``` r
 library(nPacMaps)
 install_gshhg()
 ```
 
-## Examples
+Examples
+--------
 
 ### North Pacific Basemap
 
-```{r, npac-example}
+``` r
 library(ggplot2)
 library(nPacMaps)
+#> Loading required package: maptools
+#> Loading required package: sp
+#> Checking rgeos availability: TRUE
+#> nPacMaps 2.0 (2016-07-05) 
+#>  The nPacMaps package requires an additional installation step.
+#>  Please type 'install_gshhg()' to complete this install.
 
 npac_base <- nPacMaps::npac()
+#> Data are polygon data
+#> Rgshhs: clipping 7 of 2251 polygons ...
 
 npac_plot <- ggplot() + 
   geom_polygon(data = npac_base,
@@ -55,13 +52,17 @@ npac_plot <- ggplot() +
 npac_plot
 ```
 
+![](README-npac-example-1.png)
+
 ### Alaska Basemap
 
-```{r, ak-example}
+``` r
 library(ggplot2)
 library(nPacMaps)
 
 ak_base <- nPacMaps::alaska()
+#> Data are polygon data
+#> Rgshhs: clipping 5 of 6791 polygons ...
 
 ak_plot <- ggplot() + 
   geom_polygon(data = ak_base,
@@ -71,13 +72,28 @@ ak_plot <- ggplot() +
 ak_plot
 ```
 
+![](README-ak-example-1.png)
+
 We can also zoom in on a particular region
 
-```{r, ak-example-zoom}
+``` r
 library(ggplot2)
 library(nPacMaps)
 library(crawl)
+#> crawl 2.0 (2016-02-24) 
+#>  Type 'vignette('crawl_intro')' to see examples of package use, and
+#>  'demo(package='crawl')' will provide a list of demos.
+#>  The raw code for the demos can be found by typing:
+#>  'system.file('demo', package='crawl')'
 library(dplyr)
+#> 
+#> Attaching package: 'dplyr'
+#> The following objects are masked from 'package:stats':
+#> 
+#>     filter, lag
+#> The following objects are masked from 'package:base':
+#> 
+#>     intersect, setdiff, setequal, union
 
 data("harborSeal")
 
@@ -94,6 +110,8 @@ map_limits <- nPacMaps::ggExpansion(harborSeal,x = "longitude",y = "latitude",
                                     x_fac = 1, y_fac = 1)
 
 ak_base <- nPacMaps::alaska()
+#> Data are polygon data
+#> Rgshhs: clipping 5 of 6791 polygons ...
 
 ak_plot <- ggplot() + 
   geom_polygon(data = ak_base,
@@ -105,3 +123,4 @@ ak_plot <- ggplot() +
 ak_plot
 ```
 
+![](README-ak-example-zoom-1.png)
