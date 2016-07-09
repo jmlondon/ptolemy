@@ -6,7 +6,11 @@ nPacMaps: an R package for North Pacific basemap data
 About
 -----
 
-executive summary of the package and functions
+Creating maps for the North Pacific can be difficult, frustrating, and confusing. The main source of this frustration is the 180 longitude line and the limited examples that exist for guidance. This R package relies on data from the [Global Self-consistent, Hierarchical, High-resolution Geography (GSHHG) Database](https://www.soest.hawaii.edu/pwessel/gshhg/).
+
+The main objective is to provide a simple interface for quickly loading basemap polygon land data for the North Pacific Region that can be used in either the ggplot2 or sp:spplot graphical ecosystems.
+
+This package is under active development and functionality is subject to change and improvement at anytime.
 
 Installation
 ------------
@@ -235,3 +239,9 @@ ak_plot
 ```
 
 ![](README-ak-example-zoom-1.png)
+
+------------------------------------------------------------------------
+
+##### Disclaimer
+
+<sub>This repository is a scientific product and is not official communication of the Alaska Fisheries Science Center, the National Oceanic and Atmospheric Administration, or the United States Department of Commerce. All AFSC Marine Mammal Laboratory (AFSC-MML) GitHub project code is provided on an ‘as is’ basis and the user assumes responsibility for its use. AFSC-MML has relinquished control of the information and no longer has responsibility to protect the integrity, confidentiality, or availability of the information. Any claims against the Department of Commerce or Department of Commerce bureaus stemming from the use of this GitHub project will be governed by all applicable Federal law. Any reference to specific commercial products, processes, or services by service mark, trademark, manufacturer, or otherwise, does not constitute or imply their endorsement, recommendation or favoring by the Department of Commerce. The Department of Commerce seal and logo, or the seal and logo of a DOC bureau, shall not be used in any manner to imply endorsement of any commercial product or activity by DOC or the United States Government.</sub>
