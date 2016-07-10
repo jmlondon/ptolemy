@@ -1,6 +1,6 @@
 Package: nPacMaps
 Maintainer: Josh M London <josh.london@noaa.gov>
-License: CC0
+License: CC0 | file LICENSE
 Title: North Pacific Maps
 Type: Package
 LazyData: true
