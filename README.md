@@ -19,6 +19,13 @@ The nPacMaps package is not available on CRAN and must be installed via the `dev
 
 ``` r
 install.packages("devtools")
+devtools::install_github('jmlondon/npacmaps')
+```
+
+A cutting-edge 'develop' branch is also available. Proceed with caution.
+
+``` r
+install.packages("devtools")
 devtools::install_github('jmlondon/npacmaps',ref='develop')
 ```
 
@@ -50,7 +57,7 @@ All of the returned maps are provide with projected coordinates in a default pro
 Fortify for ggplot2
 -------------------
 
-By default all of the basemap objects are returned as a `data.frame` that has been *fortified* via the `ggplot2::fortify()` function. If you would like, instead, for the object to be returned as a *SpatialPolygonsDataFrame* for use with `plot()` or `sp::spplot()` then the `fortify` parameter should be specified as `FALSE`.
+By default all of the basemap objects are returned as a `data.frame` that has been *fortified* via the `broom::tidy()` function. If you would like, instead, for the object to be returned as a *SpatialPolygonsDataFrame* for use with `plot()` or `sp::spplot()` then the `fortify` parameter should be specified as `FALSE`.
 
 Additional Utility Functions
 ----------------------------
@@ -68,9 +75,6 @@ library(nPacMaps)
 #> Loading required package: maptools
 #> Loading required package: sp
 #> Checking rgeos availability: TRUE
-#> nPacMaps 2.0 (2016-07-05) 
-#>  The nPacMaps package requires an additional installation step.
-#>  Please type 'install_gshhg()' to complete this install.
 
 npac_base <- nPacMaps::npac()
 #> Data are polygon data
@@ -85,6 +89,7 @@ npac_plot <- ggplot() +
   scale_x_continuous(labels = nPacMaps::to_km()) +
   scale_y_continuous(labels = nPacMaps::to_km()) +
   ggtitle('North Pacific Basemap (epsg:3832)')
+#> Warning: Ignoring unknown aesthetics: id
 npac_plot
 ```
 
@@ -109,6 +114,7 @@ calcur_plot <- ggplot() +
   scale_x_continuous(labels = nPacMaps::to_km()) +
   scale_y_continuous(labels = nPacMaps::to_km()) +
   ggtitle('California Current Basemap (epsg:3310)')
+#> Warning: Ignoring unknown aesthetics: id
 calcur_plot
 ```
 
@@ -122,7 +128,7 @@ library(nPacMaps)
 
 bering_base <- nPacMaps::bering()
 #> Data are polygon data
-#> Rgshhs: clipping 9 of 1105 polygons ...
+#> Rgshhs: clipping 12 of 2118 polygons ...
 
 bering_plot <- ggplot() + 
   geom_polygon(data = bering_base,
@@ -133,6 +139,7 @@ bering_plot <- ggplot() +
   scale_x_continuous(labels = nPacMaps::to_km()) +
   scale_y_continuous(labels = nPacMaps::to_km()) +
   ggtitle('Bering Sea Basemap (epsg:3571)')
+#> Warning: Ignoring unknown aesthetics: id
 bering_plot
 ```
 
@@ -157,6 +164,7 @@ us_arctic_plot <- ggplot() +
   scale_x_continuous(labels = nPacMaps::to_km()) +
   scale_y_continuous(labels = nPacMaps::to_km()) +
   ggtitle('US Arctic Basemap (epsg:3572)')
+#> Warning: Ignoring unknown aesthetics: id
 us_arctic_plot
 ```
 
@@ -181,6 +189,7 @@ ak_plot <- ggplot() +
   scale_x_continuous(labels = nPacMaps::to_km()) +
   scale_y_continuous(labels = nPacMaps::to_km()) +
   ggtitle('Alaska Basemap (epsg:3338)')
+#> Warning: Ignoring unknown aesthetics: id
 ak_plot
 ```
 
@@ -192,11 +201,9 @@ We can also zoom in on a particular region
 library(ggplot2)
 library(nPacMaps)
 library(crawl)
-#> crawl 2.0 (2016-02-24) 
-#>  Type 'vignette('crawl_intro')' to see examples of package use, and
-#>  'demo(package='crawl')' will provide a list of demos.
-#>  The raw code for the demos can be found by typing:
-#>  'system.file('demo', package='crawl')'
+#> crawl 2.1.0 (2017-02-03) 
+#>  Demos and documentation can be found at our new GitHub repository:
+#>  https://dsjohnson.github.io/crawl_examples/
 library(dplyr)
 #> 
 #> Attaching package: 'dplyr'
@@ -235,6 +242,7 @@ ak_plot <- ggplot() +
   xlab("easting (km)") + ylab("northing (km)") +
   scale_x_continuous(labels = nPacMaps::to_km()) +
   scale_y_continuous(labels = nPacMaps::to_km())
+#> Warning: Ignoring unknown aesthetics: id
 ak_plot
 ```
 

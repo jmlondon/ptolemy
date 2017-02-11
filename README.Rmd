@@ -35,6 +35,13 @@ The nPacMaps package is not available on CRAN and must be installed via the
 
 ```{r, install-code, eval=FALSE}
 install.packages("devtools")
+devtools::install_github('jmlondon/npacmaps')
+```
+
+A cutting-edge 'develop' branch is also available. Proceed with caution.
+
+```{r, install-code-develop, eval=FALSE}
+install.packages("devtools")
 devtools::install_github('jmlondon/npacmaps',ref='develop')
 ```
 
@@ -75,7 +82,7 @@ corresponding epsg integer value (as a character) to the `epsg` parameter.
 ## Fortify for ggplot2
 
 By default all of the basemap objects are returned as a `data.frame` that has
-been _fortified_ via the `ggplot2::fortify()` function. If you would like, instead,
+been _fortified_ via the `broom::tidy()` function. If you would like, instead,
 for the object to be returned as a _SpatialPolygonsDataFrame_ for use with `plot()`
 or `sp::spplot()` then the `fortify` parameter should be specified as `FALSE`.
 
