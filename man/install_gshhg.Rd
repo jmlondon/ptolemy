@@ -9,4 +9,3 @@ install_gshhg()
 \description{
 Download and Install GSHHG Binary Data
 }
-

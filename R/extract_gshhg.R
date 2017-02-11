@@ -6,7 +6,7 @@
 #' @param ylims a vector of y coordinate limits: 0-90 degrees
 #' @param resolution either "f", "h", "i", or "c"
 #' @param epsg character indicating the numeric epsg value (e.g. "3571")
-#' @param fortify TRUE/FALSE whether to return a fortified data.frame for ggplot
+#' @param fortify TRUE/FALSE whether to return a fortified data.frame for ggplot (now relies on broom::tidy instead of ggplot2::fortify())
 #'
 #' @return NULL
 #' @export
@@ -22,7 +22,7 @@ extract_gshhg <- function(xlims,ylims,
                          level = 1, checkPolygons = TRUE, shift = TRUE)
   this_extract <- sp::spTransform(this_extract$SP,CRS(paste0("+init=epsg:",epsg)))
   if (fortify) {
-    this_extract <- ggplot2::fortify(this_extract)
+    this_extract <- broom::tidy(this_extract)
   }
   return(this_extract)
 }

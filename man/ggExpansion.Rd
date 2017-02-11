@@ -13,4 +13,3 @@ a functions for expanding the xlim and ylim ggplot values
 this allows the user to provide an expansion factor for xlim
 and ylim values in ggplot
 }
-

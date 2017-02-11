@@ -13,4 +13,3 @@ the scale functions of ggplot2
 \author{
 Josh M London
 }
-

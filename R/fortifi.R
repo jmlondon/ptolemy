@@ -22,6 +22,6 @@ fortifi <- function(poly, tol, minarea=NA) {
   poly<-sp::SpatialPolygonsDataFrame(poly,data=data.frame(seq(1,l,1)),match.ID=FALSE)
   names(poly)[1]<-'region'
   slot(poly, "polygons") <- lapply(slot(poly, "polygons"), maptools::checkPolygonsHoles)
-  poly<-ggplot2::fortify(poly)
+  poly<-broom::tidy(poly)
   return(poly)
 }

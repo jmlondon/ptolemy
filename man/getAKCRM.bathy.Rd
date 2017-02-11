@@ -33,4 +33,3 @@ the bounding box coordinates should be from 0-360
 \author{
 Josh M London
 }
-

@@ -23,4 +23,3 @@ plotting large shapefiles in ggplot
 \author{
 Josh M London
 }
-
