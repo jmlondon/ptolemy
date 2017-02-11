@@ -16,7 +16,7 @@ extract_gshhg <- function(xlims,ylims,
                           fortify = TRUE) {
   dir_path <- system.file("extData", package = "nPacMaps")
   file_name <- paste0("gshhs_",resolution,".b")
-  gshhg_path <- paste(dir_path, "gshhg-bin-2.3.5", file_name, sep = "/")
+  gshhg_path <- paste(dir_path, "gshhg-bin-2.3.6", file_name, sep = "/")
   
   this_extract <- maptools::Rgshhs(gshhg_path,xlim = xlims, ylim = ylims,
                          level = 1, checkPolygons = TRUE, shift = TRUE)
@@ -34,8 +34,8 @@ extract_gshhg <- function(xlims,ylims,
 
 #' @rdname extract_gshhg
 #' @export
-bering <- function(xlims = c(180 - 30,180 + 45),
-                   ylims = c(35,75), resolution = "i",
+bering <- function(xlims = c(180 - 50,180 + 55),
+                   ylims = c(35,80), resolution = "i",
                    epsg = "3571", fortify = TRUE) {
   extract_gshhg(xlims = xlims,
                 ylims = ylims, 

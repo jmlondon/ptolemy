@@ -10,7 +10,7 @@ Description: This package contains functions for creating basemap polygons
     Hierarchical, High-resolution Geography (GSHHG) database. A separate
     download of the GSHHG binary files from
     https://www.soest.hawaii.edu/pwessel/gshhg/ is required.
-Version: 2.0
+Version: 2.1
 Date: 2016-07-05
 Depends:
     maptools

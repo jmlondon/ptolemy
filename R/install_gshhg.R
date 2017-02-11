@@ -9,18 +9,18 @@ install_gshhg <- function() {
   }
   data_path <- system.file("extData", package = "nPacMaps")
   
-  if (!file.exists(paste(data_path, "gshhg-bin-2.3.5", sep = "/"))) {
+  if (!file.exists(paste(data_path, "gshhg-bin-2.3.6", sep = "/"))) {
     cont <- readline(
       prompt = "Download and install source gshhg data (Y,n)? "
       )
     if (cont == "Y") {
       tmp <- tempfile(fileext = ".zip")
       download.file(
-        "ftp://ftp.soest.hawaii.edu/gshhg/gshhg-bin-2.3.5.zip",
+        "ftp://ftp.soest.hawaii.edu/gshhg/gshhg-bin-2.3.6.zip",
                     tmp)
       unzip(tmp, 
             exdir = paste(data_path, 
-                          "gshhg-bin-2.3.5", 
+                          "gshhg-bin-2.3.6", 
                           sep = "/"))
       unlink(tmp)
     } else if (cont == "n") {
