@@ -7,13 +7,17 @@
 #' @param resolution either "f", "h", "i", or "c"
 #' @param epsg character indicating the numeric epsg value (e.g. "3571")
 #' @param fortify TRUE/FALSE whether to return a fortified data.frame for ggplot (now relies on broom::tidy instead of ggplot2::fortify())
+#' @param sf TRUE/FALSE whether to return and sf (simple features) object
 #'
 #' @return NULL
 #' @export
 #'
 extract_gshhg <- function(xlims,ylims,
                           resolution = "i", epsg,
-                          fortify = TRUE) {
+                          fortify = TRUE, sf = FALSE) {
+  if (sf && fortify) {
+    warning("Both fortify and sf specified as TRUE. Set fortify to FALSE if you want and sf object returned")
+  }
   dir_path <- system.file("extData", package = "nPacMaps")
   file_name <- paste0("gshhs_",resolution,".b")
   gshhg_path <- paste(dir_path, "gshhg-bin-2.3.6", file_name, sep = "/")
@@ -23,6 +27,9 @@ extract_gshhg <- function(xlims,ylims,
   this_extract <- sp::spTransform(this_extract$SP,CRS(paste0("+init=epsg:",epsg)))
   if (fortify) {
     this_extract <- broom::tidy(this_extract)
+  }
+  if (sf) {
+    this_extract <- as(this_extract,"Spatial")
   }
   return(this_extract)
 }
@@ -41,7 +48,8 @@ bering <- function(xlims = c(180 - 50,180 + 55),
                 ylims = ylims, 
                 resolution = resolution,
                 epsg = epsg,
-                fortify = fortify)
+                fortify = fortify,
+                sf = sf)
 }
 
 #' Alaska Map Region
@@ -58,7 +66,8 @@ alaska <- function(xlims = c(180 - 5,180 + 50),
                 ylims = ylims, 
                 resolution = resolution,
                 epsg = epsg,
-                fortify = fortify)
+                fortify = fortify,
+                sf = sf)
 }
 
 #' US Arctic Map Region
@@ -77,7 +86,8 @@ us_arctic <- function(xlims = c(180 - 2,180 + 50),
                 ylims = ylims, 
                 resolution = resolution,
                 epsg = epsg,
-                fortify = fortify)
+                fortify = fortify,
+                sf = sf)
 }
 
 #' North Pacific Map Region
@@ -95,7 +105,8 @@ npac <- function(xlims = c(180 - 50,180 + 70),
                 ylims = ylims, 
                 resolution = resolution,
                 epsg = epsg,
-                fortify = fortify)
+                fortify = fortify,
+                sf = sf)
 }
 
 #' California Current Map Region
@@ -114,5 +125,6 @@ calcur <- function(xlims = c(180 + 35,180 + 70),
                 ylims = ylims, 
                 resolution = resolution,
                 epsg = epsg,
-                fortify = fortify)
+                fortify = fortify,
+                sf = sf)
 }
