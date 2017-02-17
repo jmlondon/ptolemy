@@ -16,7 +16,8 @@ install_gshhg <- function() {
     if (cont == "Y") {
       tmp <- tempfile(fileext = ".zip")
       download.file(
-        "ftp://ftp.soest.hawaii.edu/gshhg/gshhg-bin-2.3.6.zip",
+        #"ftp://ftp.soest.hawaii.edu/gshhg/gshhg-bin-2.3.6.zip",
+        "https://www.ngdc.noaa.gov/mgg/shorelines/data/gshhg/latest/gshhg-bin-2.3.6.zip",
                     tmp)
       unzip(tmp, 
             exdir = paste(data_path, 
