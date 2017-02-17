@@ -9,7 +9,8 @@
 \alias{calcur}
 \title{Extract Region from GSHHG}
 \usage{
-extract_gshhg(xlims, ylims, resolution = "i", epsg, fortify = TRUE)
+extract_gshhg(xlims, ylims, resolution = "i", epsg, fortify = TRUE,
+  sf = FALSE)
 
 bering(xlims = c(180 - 50, 180 + 55), ylims = c(35, 80), resolution = "i",
   epsg = "3571", fortify = TRUE)
@@ -27,7 +28,7 @@ calcur(xlims = c(180 + 35, 180 + 70), ylims = c(26, 52), resolution = "i",
   epsg = "3310", fortify = TRUE)
 }
 \arguments{
-\item{xlims}{a vector of x coordinate limits; 0-360 degrees}
+\item{xlims}{a vector of x coordinate limits; 0-360 degrees in most cases. When straddling 0, pass -longitude values (up to -180) for the left side.}
 
 \item{ylims}{a vector of y coordinate limits: 0-90 degrees}
 
@@ -36,6 +37,8 @@ calcur(xlims = c(180 + 35, 180 + 70), ylims = c(26, 52), resolution = "i",
 \item{epsg}{character indicating the numeric epsg value (e.g. "3571")}
 
 \item{fortify}{TRUE/FALSE whether to return a fortified data.frame for ggplot (now relies on broom::tidy instead of ggplot2::fortify())}
+
+\item{sf}{TRUE/FALSE whether to return and sf (simple features) object}
 }
 \description{
 Functions to extract specified N. Pacific regions from the GSHHG dataset

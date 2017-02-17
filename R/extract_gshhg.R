@@ -2,7 +2,7 @@
 #' 
 #' Functions to extract specified N. Pacific regions from the GSHHG dataset
 #'
-#' @param xlims a vector of x coordinate limits; 0-360 degrees
+#' @param xlims a vector of x coordinate limits; 0-360 degrees in most cases. When straddling 0, pass -longitude values (up to -180) for the left side.
 #' @param ylims a vector of y coordinate limits: 0-90 degrees
 #' @param resolution either "f", "h", "i", or "c"
 #' @param epsg character indicating the numeric epsg value (e.g. "3571")
@@ -22,9 +22,18 @@ extract_gshhg <- function(xlims,ylims,
   file_name <- paste0("gshhs_",resolution,".b")
   gshhg_path <- paste(dir_path, "gshhg-bin-2.3.6", file_name, sep = "/")
   
-  this_extract <- maptools::Rgshhs(gshhg_path,xlim = xlims, ylim = ylims,
+  if (xlims[1] < 0 && xlims[2] >= 0) {
+    warning("detected your xlims range crosses 0. using the getRgshhsMap function")
+    this_extract <- maptools::getRgshhsMap(gshhg_path,xlim = xlims, ylim = ylims,
+                                     level = 1, checkPolygons = TRUE, shift = TRUE)
+    this_extract <- sp::spTransform(this_extract,CRS(paste0("+init=epsg:",epsg)))
+  } else {
+    this_extract <- maptools::Rgshhs(gshhg_path,xlim = xlims, ylim = ylims,
                          level = 1, checkPolygons = TRUE, shift = TRUE)
-  this_extract <- sp::spTransform(this_extract$SP,CRS(paste0("+init=epsg:",epsg)))
+    this_extract <- sp::spTransform(this_extract$SP,CRS(paste0("+init=epsg:",epsg)))
+  }
+  
+  
   if (fortify) {
     this_extract <- broom::tidy(this_extract)
   }
