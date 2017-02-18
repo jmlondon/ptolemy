@@ -59,6 +59,11 @@ Fortify for ggplot2
 
 By default all of the basemap objects are returned as a `data.frame` that has been *fortified* via the `broom::tidy()` function. If you would like, instead, for the object to be returned as a *SpatialPolygonsDataFrame* for use with `plot()` or `sp::spplot()` then the `fortify` parameter should be specified as `FALSE`.
 
+Simplified for Improved Performance
+-----------------------------------
+
+The `rmapshaper::ms_simplify` function is applied to the returned objects by default. This improves performance for plotting and should suffice for most users. However, the original integrity of the GSHHG data will be changed. Any uses of `nPacMaps` for analytical purposes (e.g. calculating distance to shoreline, least-cost path creation around land) should consider whether passing `simplify=FALSE` would be more appropriate.
+
 Additional Utility Functions
 ----------------------------
 
@@ -79,6 +84,10 @@ library(nPacMaps)
 npac_base <- nPacMaps::npac()
 #> Data are polygon data
 #> Rgshhs: clipping 7 of 2251 polygons ...
+#> Warning in extract_gshhg(xlims = xlims, ylims = ylims, resolution =
+#> resolution, : nPacMaps now returns a polygon that has been simplified
+#> via the rmapshaper package. This should improve plotting performance. Set
+#> simplify = FALSE if you want to maintain the original gshhg shorelines.
 
 npac_plot <- ggplot() + 
   geom_polygon(data = npac_base,
@@ -104,6 +113,10 @@ library(nPacMaps)
 calcur_base <- nPacMaps::calcur()
 #> Data are polygon data
 #> Rgshhs: clipping 8 of 471 polygons ...
+#> Warning in extract_gshhg(xlims = xlims, ylims = ylims, resolution =
+#> resolution, : nPacMaps now returns a polygon that has been simplified
+#> via the rmapshaper package. This should improve plotting performance. Set
+#> simplify = FALSE if you want to maintain the original gshhg shorelines.
 
 calcur_plot <- ggplot() + 
   geom_polygon(data = calcur_base,
@@ -129,6 +142,10 @@ library(nPacMaps)
 bering_base <- nPacMaps::bering()
 #> Data are polygon data
 #> Rgshhs: clipping 12 of 2118 polygons ...
+#> Warning in extract_gshhg(xlims = xlims, ylims = ylims, resolution =
+#> resolution, : nPacMaps now returns a polygon that has been simplified
+#> via the rmapshaper package. This should improve plotting performance. Set
+#> simplify = FALSE if you want to maintain the original gshhg shorelines.
 
 bering_plot <- ggplot() + 
   geom_polygon(data = bering_base,
@@ -154,6 +171,10 @@ library(nPacMaps)
 us_arctic_base <- nPacMaps::us_arctic()
 #> Data are polygon data
 #> Rgshhs: clipping 10 of 483 polygons ...
+#> Warning in extract_gshhg(xlims = xlims, ylims = ylims, resolution =
+#> resolution, : nPacMaps now returns a polygon that has been simplified
+#> via the rmapshaper package. This should improve plotting performance. Set
+#> simplify = FALSE if you want to maintain the original gshhg shorelines.
 
 us_arctic_plot <- ggplot() + 
   geom_polygon(data = us_arctic_base,
@@ -179,6 +200,10 @@ library(nPacMaps)
 ak_base <- nPacMaps::alaska()
 #> Data are polygon data
 #> Rgshhs: clipping 5 of 1380 polygons ...
+#> Warning in extract_gshhg(xlims = xlims, ylims = ylims, resolution =
+#> resolution, : nPacMaps now returns a polygon that has been simplified
+#> via the rmapshaper package. This should improve plotting performance. Set
+#> simplify = FALSE if you want to maintain the original gshhg shorelines.
 
 ak_plot <- ggplot() + 
   geom_polygon(data = ak_base,
@@ -231,6 +256,10 @@ map_limits <- nPacMaps::ggExpansion(harborSeal,x = "longitude",y = "latitude",
 ak_base <- nPacMaps::alaska(resolution = "f")
 #> Data are polygon data
 #> Rgshhs: clipping 5 of 7494 polygons ...
+#> Warning in extract_gshhg(xlims = xlims, ylims = ylims, resolution =
+#> resolution, : nPacMaps now returns a polygon that has been simplified
+#> via the rmapshaper package. This should improve plotting performance. Set
+#> simplify = FALSE if you want to maintain the original gshhg shorelines.
 
 ak_plot <- ggplot() + 
   geom_polygon(data = ak_base,

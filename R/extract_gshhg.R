@@ -6,6 +6,7 @@
 #' @param ylims a vector of y coordinate limits: 0-90 degrees
 #' @param resolution either "f", "h", "i", or "c"
 #' @param epsg character indicating the numeric epsg value (e.g. "3571")
+#' @param simplify TRUE/FALSE whether to call rmapshaper::ms_simplify
 #' @param fortify TRUE/FALSE whether to return a fortified data.frame for ggplot (now relies on broom::tidy instead of ggplot2::fortify())
 #' @param sf TRUE/FALSE whether to return and sf (simple features) object
 #'
@@ -13,8 +14,11 @@
 #' @export
 #'
 extract_gshhg <- function(xlims,ylims,
-                          resolution = "i", epsg,
-                          fortify = TRUE, sf = FALSE) {
+                          resolution = "i", 
+                          epsg,
+                          simplify = TRUE,
+                          fortify = TRUE, 
+                          sf = FALSE) {
   if (sf && fortify) {
     warning("Both fortify and sf specified as TRUE. Set fortify to FALSE if you want and sf object returned")
   }
@@ -33,12 +37,17 @@ extract_gshhg <- function(xlims,ylims,
     this_extract <- sp::spTransform(this_extract$SP,CRS(paste0("+init=epsg:",epsg)))
   }
   
+  if (simplify) {
+    warning("nPacMaps now returns a polygon that has been simplified via the rmapshaper package. This should improve plotting performance. Set simplify = FALSE if you want to maintain the original gshhg shorelines.")
+    
+    this_extract <- rmapshaper::ms_simplify(this_extract)
+  }
   
   if (fortify) {
     this_extract <- broom::tidy(this_extract)
   }
   if (sf) {
-    this_extract <- as(this_extract,"Spatial")
+    this_extract <- sf::st_as_sf(this_extract)
   }
   return(this_extract)
 }
@@ -52,11 +61,13 @@ extract_gshhg <- function(xlims,ylims,
 #' @export
 bering <- function(xlims = c(180 - 50,180 + 55),
                    ylims = c(35,80), resolution = "i",
-                   epsg = "3571", fortify = TRUE) {
+                   epsg = "3571", simplify = TRUE,
+                   fortify = TRUE, sf = FALSE) {
   extract_gshhg(xlims = xlims,
                 ylims = ylims, 
                 resolution = resolution,
                 epsg = epsg,
+                simplify = simplify,
                 fortify = fortify,
                 sf = sf)
 }
@@ -70,11 +81,13 @@ bering <- function(xlims = c(180 - 50,180 + 55),
 #' @export
 alaska <- function(xlims = c(180 - 5,180 + 50),
                    ylims = c(35,75), resolution = "i",
-                   epsg = "3338", fortify = TRUE) {
+                   epsg = "3338", simplify = TRUE,
+                   fortify = TRUE, sf = FALSE) {
   extract_gshhg(xlims = xlims,
                 ylims = ylims, 
                 resolution = resolution,
                 epsg = epsg,
+                simplify = simplify,
                 fortify = fortify,
                 sf = sf)
 }
@@ -90,11 +103,13 @@ alaska <- function(xlims = c(180 - 5,180 + 50),
 #' @export
 us_arctic <- function(xlims = c(180 - 2,180 + 50),
                       ylims = c(60,90), resolution = "i",
-                      epsg = "3572", fortify = TRUE) {
+                      epsg = "3572", simplify = TRUE,
+                      fortify = TRUE, sf = FALSE) {
   extract_gshhg(xlims = xlims,
                 ylims = ylims, 
                 resolution = resolution,
                 epsg = epsg,
+                simplify = simplify,
                 fortify = fortify,
                 sf = sf)
 }
@@ -109,11 +124,12 @@ us_arctic <- function(xlims = c(180 - 2,180 + 50),
 #' @export
 npac <- function(xlims = c(180 - 50,180 + 70),
                  ylims = c(20,67), resolution = "i",
-                 epsg = "3832", fortify = TRUE) {
+                 epsg = "3832", simplify = TRUE,
+                 fortify = TRUE, sf = FALSE) {
   extract_gshhg(xlims = xlims,
                 ylims = ylims, 
                 resolution = resolution,
-                epsg = epsg,
+                epsg = epsg,simplify = simplify,
                 fortify = fortify,
                 sf = sf)
 }
@@ -129,11 +145,12 @@ npac <- function(xlims = c(180 - 50,180 + 70),
 #' @export
 calcur <- function(xlims = c(180 + 35,180 + 70),
                    ylims = c(26,52), resolution = "i",
-                   epsg = "3310", fortify = TRUE) {
+                   epsg = "3310", simplify = TRUE,
+                   fortify = TRUE, sf = FALSE) {
   extract_gshhg(xlims = xlims,
                 ylims = ylims, 
                 resolution = resolution,
-                epsg = epsg,
+                epsg = epsg, simplify = simplify,
                 fortify = fortify,
                 sf = sf)
 }

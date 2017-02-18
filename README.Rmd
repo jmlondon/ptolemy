@@ -86,6 +86,10 @@ been _fortified_ via the `broom::tidy()` function. If you would like, instead,
 for the object to be returned as a _SpatialPolygonsDataFrame_ for use with `plot()`
 or `sp::spplot()` then the `fortify` parameter should be specified as `FALSE`.
 
+## Simplified for Improved Performance
+
+The `rmapshaper::ms_simplify` function is applied to the returned objects by default. This improves performance for plotting and should suffice for most users. However, the original integrity of the GSHHG data will be changed. Any uses of `nPacMaps` for analytical purposes (e.g. calculating distance to shoreline, least-cost path creation around land) should consider whether passing `simplify=FALSE` would be more appropriate.
+
 ## Additional Utility Functions
 
 The package also includes two additional utility functions: `to_km()` and 
