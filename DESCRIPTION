@@ -13,6 +13,7 @@ Description: This package contains functions for creating basemap polygons
 Version: 2.1
 Date: 2017-02-17
 Depends:
+    PBSmapping,
     maptools
 Imports:
     rgeos,

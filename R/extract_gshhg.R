@@ -5,10 +5,8 @@
 #' @param xlims a vector of x coordinate limits; 0-360 degrees in most cases. When straddling 0, pass -longitude values (up to -180) for the left side.
 #' @param ylims a vector of y coordinate limits: 0-90 degrees
 #' @param resolution either "f", "h", "i", or "c"
-#' @param epsg character indicating the numeric epsg value (e.g. "3571")
+#' @param epsg integer indicating the numeric epsg value (e.g. 3571)
 #' @param simplify TRUE/FALSE whether to call rmapshaper::ms_simplify
-#' @param fortify TRUE/FALSE whether to return a fortified data.frame for ggplot (now relies on broom::tidy instead of ggplot2::fortify())
-#' @param sf TRUE/FALSE whether to return and sf (simple features) object
 #'
 #' @return NULL
 #' @export
@@ -16,38 +14,33 @@
 extract_gshhg <- function(xlims,ylims,
                           resolution = "i", 
                           epsg,
-                          simplify = TRUE,
-                          fortify = TRUE, 
-                          sf = FALSE) {
-  if (sf && fortify) {
-    warning("Both fortify and sf specified as TRUE. Set fortify to FALSE if you want and sf object returned")
-  }
+                          simplify = TRUE) {
+
   dir_path <- system.file("extData", package = "nPacMaps")
   file_name <- paste0("gshhs_",resolution,".b")
   gshhg_path <- paste(dir_path, "gshhg-bin-2.3.6", file_name, sep = "/")
+  if(resolution %in% c("f","h")) {
+    xlim_init <- xlims
+    message("you requested either 'full' or 'high' resolution GSHHS data. It make take a few minutes to create your object")
+  } else {xlim_init <- c(0,360)}
   
-  if (xlims[1] < 0 && xlims[2] >= 0) {
-    warning("detected your xlims range crosses 0. using the getRgshhsMap function")
-    this_extract <- maptools::getRgshhsMap(gshhg_path,xlim = xlims, ylim = ylims,
-                                     level = 1, checkPolygons = TRUE, shift = TRUE)
-    this_extract <- sp::spTransform(this_extract,CRS(paste0("+init=epsg:",epsg)))
-  } else {
-    this_extract <- maptools::Rgshhs(gshhg_path,xlim = xlims, ylim = ylims,
-                         level = 1, checkPolygons = TRUE, shift = TRUE)
-    this_extract <- sp::spTransform(this_extract$SP,CRS(paste0("+init=epsg:",epsg)))
+  this_extract <- PBSmapping::importGSHHS(gshhg_path,xlim = xlim_init, 
+                                         ylim = ylims, n = 1,
+                                         maxLevel = 1)
+  if(!resolution %in% c("f","h")) {
+    this_extract <- PBSmapping::refocusWorld(this_extract,xlim = xlims, ylim = ylims)
   }
+  this_extract <- PBSmapping::clipPolys(this_extract,xlim = xlims, ylim = ylims)
+  this_extract <- maptools::PolySet2SpatialPolygons(this_extract)
+  this_extract <- sf::st_as_sf(this_extract) %>% sf::st_transform(epsg)
   
   if (simplify) {
     warning("nPacMaps now returns a polygon that has been simplified via the rmapshaper package. This should improve plotting performance. Set simplify = FALSE if you want to maintain the original gshhg shorelines.")
     
-    this_extract <- rmapshaper::ms_simplify(this_extract)
-  }
-  
-  if (fortify) {
-    this_extract <- broom::tidy(this_extract)
-  }
-  if (sf) {
-    this_extract <- sf::st_as_sf(this_extract)
+    this_extract <- rmapshaper::ms_simplify(this_extract,
+                                            keep = 0.2,
+                                            keep_shapes = TRUE,
+                                            explode = TRUE)
   }
   return(this_extract)
 }
@@ -61,15 +54,12 @@ extract_gshhg <- function(xlims,ylims,
 #' @export
 bering <- function(xlims = c(180 - 50,180 + 55),
                    ylims = c(35,80), resolution = "i",
-                   epsg = "3571", simplify = TRUE,
-                   fortify = TRUE, sf = FALSE) {
+                   epsg = 3571, simplify = TRUE) {
   extract_gshhg(xlims = xlims,
                 ylims = ylims, 
                 resolution = resolution,
                 epsg = epsg,
-                simplify = simplify,
-                fortify = fortify,
-                sf = sf)
+                simplify = simplify)
 }
 
 #' Alaska Map Region
@@ -80,16 +70,13 @@ bering <- function(xlims = c(180 - 50,180 + 55),
 #' @rdname extract_gshhg
 #' @export
 alaska <- function(xlims = c(180 - 5,180 + 50),
-                   ylims = c(35,75), resolution = "i",
-                   epsg = "3338", simplify = TRUE,
-                   fortify = TRUE, sf = FALSE) {
+                   ylims = c(35,68), resolution = "i",
+                   epsg = 3338, simplify = TRUE) {
   extract_gshhg(xlims = xlims,
                 ylims = ylims, 
                 resolution = resolution,
                 epsg = epsg,
-                simplify = simplify,
-                fortify = fortify,
-                sf = sf)
+                simplify = simplify)
 }
 
 #' US Arctic Map Region
@@ -103,15 +90,12 @@ alaska <- function(xlims = c(180 - 5,180 + 50),
 #' @export
 us_arctic <- function(xlims = c(180 - 2,180 + 50),
                       ylims = c(60,90), resolution = "i",
-                      epsg = "3572", simplify = TRUE,
-                      fortify = TRUE, sf = FALSE) {
+                      epsg = 3572, simplify = TRUE) {
   extract_gshhg(xlims = xlims,
                 ylims = ylims, 
                 resolution = resolution,
                 epsg = epsg,
-                simplify = simplify,
-                fortify = fortify,
-                sf = sf)
+                simplify = simplify)
 }
 
 #' North Pacific Map Region
@@ -124,14 +108,11 @@ us_arctic <- function(xlims = c(180 - 2,180 + 50),
 #' @export
 npac <- function(xlims = c(180 - 50,180 + 70),
                  ylims = c(20,67), resolution = "i",
-                 epsg = "3832", simplify = TRUE,
-                 fortify = TRUE, sf = FALSE) {
+                 epsg = 3832, simplify = TRUE) {
   extract_gshhg(xlims = xlims,
                 ylims = ylims, 
                 resolution = resolution,
-                epsg = epsg,simplify = simplify,
-                fortify = fortify,
-                sf = sf)
+                epsg = epsg,simplify = simplify)
 }
 
 #' California Current Map Region
@@ -145,12 +126,9 @@ npac <- function(xlims = c(180 - 50,180 + 70),
 #' @export
 calcur <- function(xlims = c(180 + 35,180 + 70),
                    ylims = c(26,52), resolution = "i",
-                   epsg = "3310", simplify = TRUE,
-                   fortify = TRUE, sf = FALSE) {
+                   epsg = 3310, simplify = TRUE) {
   extract_gshhg(xlims = xlims,
                 ylims = ylims, 
                 resolution = resolution,
-                epsg = epsg, simplify = simplify,
-                fortify = fortify,
-                sf = sf)
+                epsg = epsg, simplify = simplify)
 }
