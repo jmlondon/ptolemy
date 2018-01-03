@@ -77,28 +77,49 @@ Examples
 ``` r
 library(ggplot2)
 library(nPacMaps)
+#> Loading required package: PBSmapping
+#> 
+#> -----------------------------------------------------------
+#> PBS Mapping 2.70.4 -- Copyright (C) 2003-2018 Fisheries and Oceans Canada
+#> 
+#> PBS Mapping comes with ABSOLUTELY NO WARRANTY;
+#> for details see the file COPYING.
+#> This is free software, and you are welcome to redistribute
+#> it under certain conditions, as outlined in the above file.
+#> 
+#> A complete user guide 'PBSmapping-UG.pdf' is located at 
+#> /Users/josh.london/Library/R/3.4/library/PBSmapping/doc/PBSmapping-UG.pdf
+#> 
+#> Packaged on 2017-06-28
+#> Pacific Biological Station, Nanaimo
+#> 
+#> All available PBS packages can be found at
+#> https://github.com/pbs-software
+#> 
+#> To see demos, type '.PBSfigs()'.
+#> -----------------------------------------------------------
 #> Loading required package: maptools
 #> Loading required package: sp
 #> Checking rgeos availability: TRUE
+library(sf)
+#> Linking to GEOS 3.6.2, GDAL 2.2.3, proj.4 4.9.3
 
 npac_base <- nPacMaps::npac()
-#> Data are polygon data
-#> Rgshhs: clipping 7 of 2251 polygons ...
+#> importGSHHS status:
+#> --> Pass 1: complete: 15611 bounding boxes within limits.
+#> --> Pass 2: complete.
+#> --> Clipping...
+#> Warning in refocusWorld(as.PolySet(as.data.frame(xres), projection = "LL"), : Removed duplicates of following polygons (Antarctica?): 0, 1, 15
+#> importGSHHS: input xlim was (0, 360) and the longitude range of the extracted data is (0, 359.532917).
 #> Warning in extract_gshhg(xlims = xlims, ylims = ylims, resolution =
 #> resolution, : nPacMaps now returns a polygon that has been simplified
 #> via the rmapshaper package. This should improve plotting performance. Set
 #> simplify = FALSE if you want to maintain the original gshhg shorelines.
 
 npac_plot <- ggplot() + 
-  geom_polygon(data = npac_base,
-               aes(x = long,y = lat,group = group,id = id),
-               fill = "grey60") +
-  coord_fixed() +
-  xlab("easting (km)") + ylab("northing (km)") +
-  scale_x_continuous(labels = nPacMaps::to_km()) +
-  scale_y_continuous(labels = nPacMaps::to_km()) +
+  geom_sf(data = npac_base,
+               fill = "grey60", size = 0.2) +
   ggtitle('North Pacific Basemap (epsg:3832)')
-#> Warning: Ignoring unknown aesthetics: id
 npac_plot
 ```
 
@@ -109,25 +130,24 @@ npac_plot
 ``` r
 library(ggplot2)
 library(nPacMaps)
+library(sf)
 
 calcur_base <- nPacMaps::calcur()
-#> Data are polygon data
-#> Rgshhs: clipping 8 of 471 polygons ...
+#> importGSHHS status:
+#> --> Pass 1: complete: 4965 bounding boxes within limits.
+#> --> Pass 2: complete.
+#> --> Clipping...
+#> Warning in refocusWorld(as.PolySet(as.data.frame(xres), projection = "LL"), : Removed duplicates of following polygons (Antarctica?): 0, 1, 15
+#> importGSHHS: input xlim was (0, 360) and the longitude range of the extracted data is (0, 359.532917).
 #> Warning in extract_gshhg(xlims = xlims, ylims = ylims, resolution =
 #> resolution, : nPacMaps now returns a polygon that has been simplified
 #> via the rmapshaper package. This should improve plotting performance. Set
 #> simplify = FALSE if you want to maintain the original gshhg shorelines.
 
 calcur_plot <- ggplot() + 
-  geom_polygon(data = calcur_base,
-               aes(x = long,y = lat,group = group,id = id),
-               fill = "grey60") +
-  coord_fixed() +
-  xlab("easting (km)") + ylab("northing (km)") +
-  scale_x_continuous(labels = nPacMaps::to_km()) +
-  scale_y_continuous(labels = nPacMaps::to_km()) +
+  geom_sf(data = calcur_base,
+               fill = "grey60", size = 0.2) +
   ggtitle('California Current Basemap (epsg:3310)')
-#> Warning: Ignoring unknown aesthetics: id
 calcur_plot
 ```
 
@@ -138,25 +158,24 @@ calcur_plot
 ``` r
 library(ggplot2)
 library(nPacMaps)
+library(sf)
 
 bering_base <- nPacMaps::bering()
-#> Data are polygon data
-#> Rgshhs: clipping 12 of 2118 polygons ...
+#> importGSHHS status:
+#> --> Pass 1: complete: 15491 bounding boxes within limits.
+#> --> Pass 2: complete.
+#> --> Clipping...
+#> Warning in refocusWorld(as.PolySet(as.data.frame(xres), projection = "LL"), : Removed duplicates of following polygons (Antarctica?): 0, 1, 15
+#> importGSHHS: input xlim was (0, 360) and the longitude range of the extracted data is (0, 359.532917).
 #> Warning in extract_gshhg(xlims = xlims, ylims = ylims, resolution =
 #> resolution, : nPacMaps now returns a polygon that has been simplified
 #> via the rmapshaper package. This should improve plotting performance. Set
 #> simplify = FALSE if you want to maintain the original gshhg shorelines.
 
 bering_plot <- ggplot() + 
-  geom_polygon(data = bering_base,
-               aes(x = long,y = lat,group = group,id = id),
-               fill = "grey60") +
-  coord_fixed() +
-  xlab("easting (km)") + ylab("northing (km)") +
-  scale_x_continuous(labels = nPacMaps::to_km()) +
-  scale_y_continuous(labels = nPacMaps::to_km()) +
+  geom_sf(data = bering_base,
+               fill = "grey60", size = 0.2) +
   ggtitle('Bering Sea Basemap (epsg:3571)')
-#> Warning: Ignoring unknown aesthetics: id
 bering_plot
 ```
 
@@ -167,25 +186,24 @@ bering_plot
 ``` r
 library(ggplot2)
 library(nPacMaps)
+library(sf)
 
 us_arctic_base <- nPacMaps::us_arctic()
-#> Data are polygon data
-#> Rgshhs: clipping 10 of 483 polygons ...
+#> importGSHHS status:
+#> --> Pass 1: complete: 9504 bounding boxes within limits.
+#> --> Pass 2: complete.
+#> --> Clipping...
+#> Warning in refocusWorld(as.PolySet(as.data.frame(xres), projection = "LL"), : Removed duplicates of following polygons (Antarctica?): 0
+#> importGSHHS: input xlim was (0, 360) and the longitude range of the extracted data is (4.585778, 359.275833).
 #> Warning in extract_gshhg(xlims = xlims, ylims = ylims, resolution =
 #> resolution, : nPacMaps now returns a polygon that has been simplified
 #> via the rmapshaper package. This should improve plotting performance. Set
 #> simplify = FALSE if you want to maintain the original gshhg shorelines.
 
 us_arctic_plot <- ggplot() + 
-  geom_polygon(data = us_arctic_base,
-               aes(x = long,y = lat,group = group,id = id),
-               fill = "grey60") +
-  coord_fixed() +
-  xlab("easting (km)") + ylab("northing (km)") +
-  scale_x_continuous(labels = nPacMaps::to_km()) +
-  scale_y_continuous(labels = nPacMaps::to_km()) +
+  geom_sf(data = us_arctic_base,
+               fill = "grey60", size = 0.2) +
   ggtitle('US Arctic Basemap (epsg:3572)')
-#> Warning: Ignoring unknown aesthetics: id
 us_arctic_plot
 ```
 
@@ -196,25 +214,24 @@ us_arctic_plot
 ``` r
 library(ggplot2)
 library(nPacMaps)
+library(sf)
 
 ak_base <- nPacMaps::alaska()
-#> Data are polygon data
-#> Rgshhs: clipping 5 of 1380 polygons ...
+#> importGSHHS status:
+#> --> Pass 1: complete: 11544 bounding boxes within limits.
+#> --> Pass 2: complete.
+#> --> Clipping...
+#> Warning in refocusWorld(as.PolySet(as.data.frame(xres), projection = "LL"), : Removed duplicates of following polygons (Antarctica?): 0, 1, 15
+#> importGSHHS: input xlim was (0, 360) and the longitude range of the extracted data is (0, 359.532917).
 #> Warning in extract_gshhg(xlims = xlims, ylims = ylims, resolution =
 #> resolution, : nPacMaps now returns a polygon that has been simplified
 #> via the rmapshaper package. This should improve plotting performance. Set
 #> simplify = FALSE if you want to maintain the original gshhg shorelines.
 
 ak_plot <- ggplot() + 
-  geom_polygon(data = ak_base,
-               aes(x = long,y = lat,group = group,id = id),
-               fill = "grey60") +
-  coord_fixed() +
-  xlab("easting (km)") + ylab("northing (km)") +
-  scale_x_continuous(labels = nPacMaps::to_km()) +
-  scale_y_continuous(labels = nPacMaps::to_km()) +
+  geom_sf(data = ak_base,
+               fill = "grey60", size = 0.2) +
   ggtitle('Alaska Basemap (epsg:3338)')
-#> Warning: Ignoring unknown aesthetics: id
 ak_plot
 ```
 
@@ -226,7 +243,7 @@ We can also zoom in on a particular region
 library(ggplot2)
 library(nPacMaps)
 library(crawl)
-#> crawl 2.1.0 (2017-02-03) 
+#> crawl 2.1.2 (2017-04-27) 
 #>  Demos and documentation can be found at our new GitHub repository:
 #>  https://dsjohnson.github.io/crawl_examples/
 library(dplyr)
@@ -238,40 +255,40 @@ library(dplyr)
 #> The following objects are masked from 'package:base':
 #> 
 #>     intersect, setdiff, setequal, union
+library(sf)
 
 data("harborSeal")
 
-harborSeal <- harborSeal %>% filter(!is.na(latitude)) %>% 
-  as.data.frame()
+harborSeal <- harborSeal %>% 
+  filter(!is.na(latitude)) %>% 
+  as.data.frame() %>% 
+  sf::st_as_sf(coords = c("longitude","latitude")) %>% 
+  sf::st_set_crs(4326) %>% 
+  sf::st_transform(3338)
 
-sp::coordinates(harborSeal) <- ~longitude + latitude
-sp::proj4string(harborSeal) <- CRS("+init=epsg:4326")
-
-harborSeal <- sp::spTransform(harborSeal, CRS("+init=epsg:3338"))
-harborSeal <- as.data.frame(harborSeal)
-
-map_limits <- nPacMaps::ggExpansion(harborSeal,x = "longitude",y = "latitude",
-                                    x_fac = 0.25, y_fac = 0.25)
+b <- sf::st_bbox(harborSeal)
+b
+#>       xmin       ymin       xmax       ymax 
+#> -333349.45  579591.03   89911.47 1046814.58
 
 ak_base <- nPacMaps::alaska(resolution = "f")
-#> Data are polygon data
-#> Rgshhs: clipping 5 of 7494 polygons ...
+#> you requested either 'full' or 'high' resolution GSHHS data. It make take a few minutes to create your object
+#> importGSHHS status:
+#> --> Pass 1: complete: 6834 bounding boxes within limits.
+#> --> Pass 2: complete.
+#> --> Clipping...
+#> importGSHHS: input xlim was (175, 230) and the longitude range of the extracted data is (175, 230).
 #> Warning in extract_gshhg(xlims = xlims, ylims = ylims, resolution =
 #> resolution, : nPacMaps now returns a polygon that has been simplified
 #> via the rmapshaper package. This should improve plotting performance. Set
 #> simplify = FALSE if you want to maintain the original gshhg shorelines.
 
 ak_plot <- ggplot() + 
-  geom_polygon(data = ak_base,
-               aes(x = long,y = lat,group = group,id = id),
-               fill = "grey60") +
-  geom_point(data = harborSeal,aes(x = longitude, y = latitude), 
+  geom_sf(data = ak_base,
+               fill = "grey60", size = 0.2) +
+  geom_sf(data = harborSeal,
              alpha = 0.1, color = 'blue') +
-  coord_fixed(xlim = map_limits$xlim, ylim = map_limits$ylim) +
-  xlab("easting (km)") + ylab("northing (km)") +
-  scale_x_continuous(labels = nPacMaps::to_km()) +
-  scale_y_continuous(labels = nPacMaps::to_km())
-#> Warning: Ignoring unknown aesthetics: id
+  coord_sf(xlim = c(b["xmin"], b["xmax"]), ylim = c(b["ymin"], b["ymax"]))
 ak_plot
 ```
 
