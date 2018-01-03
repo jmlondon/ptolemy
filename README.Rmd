@@ -22,8 +22,8 @@ examples that exist for guidance. This R package relies on data from the [Global
 Self-consistent, Hierarchical, High-resolution Geography (GSHHG) Database](https://www.soest.hawaii.edu/pwessel/gshhg/).
 
 The main objective is to provide a simple interface for quickly loading basemap
-polygon land data for the North Pacific Region that can be used in either the
-ggplot2 or sp:spplot graphical ecosystems.
+polygon land data for the North Pacific Region that can be used in the
+ggplot2 graphical ecosystem.
 
 This package is under active development and functionality is subject to change
 and improvement at anytime.
@@ -77,26 +77,23 @@ All of the returned maps are provide with projected coordinates in a default
 projection chosen for each region. In most cases, the default projections
 are sensible and all users need to do is insure all other data is transformed
 to the same projection. A custom projection can be provided by specifying the 
-corresponding epsg integer value (as a character) to the `epsg` parameter.
+corresponding epsg integer value to the `epsg` parameter.
 
-## Fortify for ggplot2
+## geom_sf for ggplot2
 
-By default all of the basemap objects are returned as a `data.frame` that has
-been _fortified_ via the `broom::tidy()` function. If you would like, instead,
-for the object to be returned as a _SpatialPolygonsDataFrame_ for use with `plot()`
-or `sp::spplot()` then the `fortify` parameter should be specified as `FALSE`.
+By default all of the basemap objects are returned as an `sf` object. ggplot2
+now offers native support for plotting `sf` objects via the `geom_sf`. The 
+examples below demonstrate basic use of `geom_sf`.
 
 ## Simplified for Improved Performance
 
-The `rmapshaper::ms_simplify` function is applied to the returned objects by default. This improves performance for plotting and should suffice for most users. However, the original integrity of the GSHHG data will be changed. Any uses of `nPacMaps` for analytical purposes (e.g. calculating distance to shoreline, least-cost path creation around land) should consider whether passing `simplify=FALSE` would be more appropriate.
+The `rmapshaper::ms_simplify` function is applied to the returned objects by default. 
+The function is set to return 20% of the original points and to preserve small shapes (i.e. small islands and other features). This improves performance for plotting and should suffice for most users. However, the original integrity of the GSHHG data will be changed. Any uses of `nPacMaps` for analytical purposes (e.g. calculating distance to shoreline, least-cost path creation around land) should consider whether passing `simplify=FALSE` would be more appropriate.
 
 ## Additional Utility Functions
 
-The package also includes two additional utility functions: `to_km()` and 
-`ggExpansion()`. The `to_km()` function provides simple conversion of the
-easting and northing labels from meters to kilometers. The `ggExpansion()`
-function allows the user to easily specify an expansion fraction for the xlim and
-ylim components of the ggplot.
+The package previously included two additional utility functions: `to_km()` and 
+`ggExpansion()`. These have been deprecated.
 
 ## Examples
 
