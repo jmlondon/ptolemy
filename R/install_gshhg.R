@@ -9,18 +9,18 @@ install_gshhg <- function() {
   }
   data_path <- system.file("extData", package = "nPacMaps")
   
-  if (!file.exists(paste(data_path, "gshhg-bin-2.3.6", sep = "/"))) {
+  if (!file.exists(paste(data_path, "gshhg-bin-2.3.7", sep = "/"))) {
     cont <- readline(
       prompt = "Download and install source gshhg data (Y,n)? "
       )
     if (cont == "Y") {
       tmp <- tempfile(fileext = ".zip")
       download.file(
-        "https://www.ngdc.noaa.gov/mgg/shorelines/data/gshhg/latest/gshhg-bin-2.3.6.zip",
+        "https://www.ngdc.noaa.gov/mgg/shorelines/data/gshhg/latest/gshhg-bin-2.3.7.zip",
                     tmp)
       unzip(tmp, 
             exdir = paste(data_path, 
-                          "gshhg-bin-2.3.6", 
+                          "gshhg-bin-2.3.7", 
                           sep = "/"))
       unlink(tmp)
     } else if (cont == "n") {
