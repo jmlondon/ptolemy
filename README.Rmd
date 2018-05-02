@@ -19,7 +19,7 @@ knitr::opts_chunk$set(
 Creating maps for the North Pacific can be difficult, frustrating, and confusing.
 The main source of this frustration is the 180 longitude line and the limited
 examples that exist for guidance. This R package relies on data from the [Global 
-Self-consistent, Hierarchical, High-resolution Geography (GSHHG) Database](https://www.soest.hawaii.edu/pwessel/gshhg/).
+Self-consistent, Hierarchical, High-resolution Geography (GSHHG) Database](https://www.ngdc.noaa.gov/mgg/shorelines/data/gshhg/latest/).
 
 The main objective is to provide a simple interface for quickly loading basemap
 polygon land data for the North Pacific Region that can be used in the

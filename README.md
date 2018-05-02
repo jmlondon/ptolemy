@@ -6,7 +6,7 @@ nPacMaps: an R package for North Pacific basemap data
 About
 -----
 
-Creating maps for the North Pacific can be difficult, frustrating, and confusing. The main source of this frustration is the 180 longitude line and the limited examples that exist for guidance. This R package relies on data from the [Global Self-consistent, Hierarchical, High-resolution Geography (GSHHG) Database](https://www.soest.hawaii.edu/pwessel/gshhg/).
+Creating maps for the North Pacific can be difficult, frustrating, and confusing. The main source of this frustration is the 180 longitude line and the limited examples that exist for guidance. This R package relies on data from the [Global Self-consistent, Hierarchical, High-resolution Geography (GSHHG) Database](https://www.ngdc.noaa.gov/mgg/shorelines/data/gshhg/latest/).
 
 The main objective is to provide a simple interface for quickly loading basemap polygon land data for the North Pacific Region that can be used in the ggplot2 graphical ecosystem.
 
@@ -88,7 +88,7 @@ library(nPacMaps)
 #> it under certain conditions, as outlined in the above file.
 #> 
 #> A complete user guide 'PBSmapping-UG.pdf' is located at 
-#> /Users/josh.london/Library/R/3.4/library/PBSmapping/doc/PBSmapping-UG.pdf
+#> /Users/josh.london/Library/R/3.5/library/PBSmapping/doc/PBSmapping-UG.pdf
 #> 
 #> Packaged on 2017-06-28
 #> Pacific Biological Station, Nanaimo
@@ -102,15 +102,17 @@ library(nPacMaps)
 #> Loading required package: sp
 #> Checking rgeos availability: TRUE
 library(sf)
-#> Linking to GEOS 3.6.2, GDAL 2.2.3, proj.4 4.9.3
+#> Linking to GEOS 3.6.2, GDAL 2.2.4, proj.4 5.0.1
 
 npac_base <- nPacMaps::npac()
 #> importGSHHS status:
-#> --> Pass 1: complete: 15611 bounding boxes within limits.
+#> --> Pass 1: complete: 15609 bounding boxes within limits.
 #> --> Pass 2: complete.
 #> --> Clipping...
 #> Warning in refocusWorld(as.PolySet(as.data.frame(xres), projection = "LL"), : Removed duplicates of following polygons (Antarctica?): 0, 1, 15
 #> importGSHHS: input xlim was (0, 360) and the longitude range of the extracted data is (0, 359.532917).
+#> Warning in seq.default(along = outPolygons): partial argument match of
+#> 'along' to 'along.with'
 #> Warning in extract_gshhg(xlims = xlims, ylims = ylims, resolution =
 #> resolution, : nPacMaps now returns a polygon that has been simplified
 #> via the rmapshaper package. This should improve plotting performance. Set
@@ -139,6 +141,8 @@ calcur_base <- nPacMaps::calcur()
 #> --> Clipping...
 #> Warning in refocusWorld(as.PolySet(as.data.frame(xres), projection = "LL"), : Removed duplicates of following polygons (Antarctica?): 0, 1, 15
 #> importGSHHS: input xlim was (0, 360) and the longitude range of the extracted data is (0, 359.532917).
+#> Warning in seq.default(along = outPolygons): partial argument match of
+#> 'along' to 'along.with'
 #> Warning in extract_gshhg(xlims = xlims, ylims = ylims, resolution =
 #> resolution, : nPacMaps now returns a polygon that has been simplified
 #> via the rmapshaper package. This should improve plotting performance. Set
@@ -162,11 +166,13 @@ library(sf)
 
 bering_base <- nPacMaps::bering()
 #> importGSHHS status:
-#> --> Pass 1: complete: 15491 bounding boxes within limits.
+#> --> Pass 1: complete: 15493 bounding boxes within limits.
 #> --> Pass 2: complete.
 #> --> Clipping...
 #> Warning in refocusWorld(as.PolySet(as.data.frame(xres), projection = "LL"), : Removed duplicates of following polygons (Antarctica?): 0, 1, 15
 #> importGSHHS: input xlim was (0, 360) and the longitude range of the extracted data is (0, 359.532917).
+#> Warning in seq.default(along = outPolygons): partial argument match of
+#> 'along' to 'along.with'
 #> Warning in extract_gshhg(xlims = xlims, ylims = ylims, resolution =
 #> resolution, : nPacMaps now returns a polygon that has been simplified
 #> via the rmapshaper package. This should improve plotting performance. Set
@@ -190,11 +196,13 @@ library(sf)
 
 us_arctic_base <- nPacMaps::us_arctic()
 #> importGSHHS status:
-#> --> Pass 1: complete: 9504 bounding boxes within limits.
+#> --> Pass 1: complete: 9506 bounding boxes within limits.
 #> --> Pass 2: complete.
 #> --> Clipping...
 #> Warning in refocusWorld(as.PolySet(as.data.frame(xres), projection = "LL"), : Removed duplicates of following polygons (Antarctica?): 0
 #> importGSHHS: input xlim was (0, 360) and the longitude range of the extracted data is (4.585778, 359.275833).
+#> Warning in seq.default(along = outPolygons): partial argument match of
+#> 'along' to 'along.with'
 #> Warning in extract_gshhg(xlims = xlims, ylims = ylims, resolution =
 #> resolution, : nPacMaps now returns a polygon that has been simplified
 #> via the rmapshaper package. This should improve plotting performance. Set
@@ -218,11 +226,13 @@ library(sf)
 
 ak_base <- nPacMaps::alaska()
 #> importGSHHS status:
-#> --> Pass 1: complete: 11544 bounding boxes within limits.
+#> --> Pass 1: complete: 11546 bounding boxes within limits.
 #> --> Pass 2: complete.
 #> --> Clipping...
 #> Warning in refocusWorld(as.PolySet(as.data.frame(xres), projection = "LL"), : Removed duplicates of following polygons (Antarctica?): 0, 1, 15
 #> importGSHHS: input xlim was (0, 360) and the longitude range of the extracted data is (0, 359.532917).
+#> Warning in seq.default(along = outPolygons): partial argument match of
+#> 'along' to 'along.with'
 #> Warning in extract_gshhg(xlims = xlims, ylims = ylims, resolution =
 #> resolution, : nPacMaps now returns a polygon that has been simplified
 #> via the rmapshaper package. This should improve plotting performance. Set
@@ -243,12 +253,15 @@ We can also zoom in on a particular region
 library(ggplot2)
 library(nPacMaps)
 library(crawl)
-#> crawl 2.1.2 (2017-04-27) 
+#> crawl 2.1.1 (2017-04-21) 
 #>  Demos and documentation can be found at our new GitHub repository:
 #>  https://dsjohnson.github.io/crawl_examples/
 library(dplyr)
 #> 
 #> Attaching package: 'dplyr'
+#> The following object is masked from 'package:ggplot2':
+#> 
+#>     vars
 #> The following objects are masked from 'package:stats':
 #> 
 #>     filter, lag
@@ -278,6 +291,8 @@ ak_base <- nPacMaps::alaska(resolution = "f")
 #> --> Pass 2: complete.
 #> --> Clipping...
 #> importGSHHS: input xlim was (175, 230) and the longitude range of the extracted data is (175, 230).
+#> Warning in seq.default(along = outPolygons): partial argument match of
+#> 'along' to 'along.with'
 #> Warning in extract_gshhg(xlims = xlims, ylims = ylims, resolution =
 #> resolution, : nPacMaps now returns a polygon that has been simplified
 #> via the rmapshaper package. This should improve plotting performance. Set

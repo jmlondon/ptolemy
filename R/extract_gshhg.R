@@ -18,7 +18,7 @@ extract_gshhg <- function(xlims,ylims,
 
   dir_path <- system.file("extData", package = "nPacMaps")
   file_name <- paste0("gshhs_",resolution,".b")
-  gshhg_path <- paste(dir_path, "gshhg-bin-2.3.6", file_name, sep = "/")
+  gshhg_path <- paste(dir_path, "gshhg-bin-2.3.7", file_name, sep = "/")
   if(resolution %in% c("f","h")) {
     xlim_init <- xlims
     message("you requested either 'full' or 'high' resolution GSHHS data. It make take a few minutes to create your object")
