@@ -11,18 +11,15 @@ Description: This package contains functions for creating basemap polygons
     functions are provided for regions specific to the North Pacific. A separate
     download of the GSHHG binary files from
     https://www.ngdc.noaa.gov/mgg/shorelines/data/gshhg/latest/ is required.
-Version: 1.0
+Version: 1.0.0
 Date: 2018-10-24
 Encoding: UTF-8
 Depends:
-    PBSmapping,
-    maptools
 Imports:
-    rgeos,
-    sp,
+    PBSmapping,
     sf,
     rmapshaper,
-    ggplot2,
-    broom,
-    marmap
+    magrittr
+Suggests:
+    ggplot2
 RoxygenNote: 6.1.0
