@@ -1,42 +1,58 @@
 #' Extract Region from GSHHG
 #' 
-#' Functions to extract specified N. Pacific regions from the GSHHG dataset
+#' Functions to extract specified regions from the GSHHG dataset
 #'
-#' @param xlims a vector of x coordinate limits; 0-360 degrees in most cases. When straddling 0, pass -longitude values (up to -180) for the left side.
-#' @param ylims a vector of y coordinate limits: 0-90 degrees
+#' @param data an sf object that defines that area of interest
 #' @param resolution either "f", "h", "i", or "c"
 #' @param epsg integer indicating the numeric epsg value (e.g. 3571)
+#' @param buffer integer indicating a value in projected units to buffer data
 #' @param simplify TRUE/FALSE whether to call rmapshaper::ms_simplify
 #'
 #' @return NULL
 #' @export
 #'
-extract_gshhg <- function(xlims,ylims,
+extract_gshhg <- function(data,
                           resolution = "i", 
-                          epsg,
-                          simplify = TRUE) {
-
+                          epsg = NULL,
+                          buffer = 5000,
+                          simplify = FALSE) {
+  if (is.null(epsg)) {
+    if (is.null(sf::st_crs(data))) {
+      stop("epsg value not provided and cannot be determined from data")
+    }
+    if (sf::st_is_longlat(data)) {
+      stop("data are in longlat and a projected epsg value is not provided")
+    }
+    epsg <- sf::st_crs(data)
+  }
   dir_path <- system.file("extData", package = "nPacMaps")
   file_name <- paste0("gshhs_",resolution,".b")
   gshhg_path <- paste(dir_path, "gshhg-bin-2.3.7", file_name, sep = "/")
-  if(resolution %in% c("f","h")) {
-    xlim_init <- xlims
-    message("you requested either 'full' or 'high' resolution GSHHS data. It make take a few minutes to create your object")
-  } else {xlim_init <- c(0,360)}
   
-  this_extract <- PBSmapping::importGSHHS(gshhg_path,xlim = xlim_init, 
-                                         ylim = ylims, n = 1,
+  data_buffer <- data %>% 
+    sf::st_transform(epsg) %>% 
+    sf::st_union() %>% 
+    sf::st_convex_hull() %>% 
+    sf::st_buffer(buffer) %>% sf::st_transform(4326)
+  
+  data_360 <- (sf::st_geometry(data_buffer) + c(360,90)) %% c(360) - c(0,90)
+
+  bbox <- sf::st_bbox(data_360)
+  xlim <- c(0,360)
+  ylim <- c(bbox$ymin,bbox$ymax)
+  
+  this_extract <- PBSmapping::importGSHHS(gshhg_path,xlim = xlim, 
+                                         ylim = ylim, n = 1,
                                          maxLevel = 1)
-  if(!resolution %in% c("f","h")) {
-    this_extract <- PBSmapping::refocusWorld(this_extract,xlim = xlims, ylim = ylims)
-  }
-  this_extract <- PBSmapping::clipPolys(this_extract,xlim = xlims, ylim = ylims)
+  xlim <- c(bbox$xmin,bbox$xmax)
+  this_extract <- PBSmapping::refocusWorld(this_extract,xlim = xlim, ylim = ylim)
+  this_extract <- PBSmapping::clipPolys(this_extract,xlim = xlim, ylim = ylim)
   this_extract <- maptools::PolySet2SpatialPolygons(this_extract)
-  this_extract <- sf::st_as_sf(this_extract) %>% sf::st_transform(epsg)
+  this_extract <- sf::st_as_sf(this_extract) %>% 
+    sf::st_buffer(0) %>% 
+    sf::st_transform(epsg)
   
   if (simplify) {
-    warning("nPacMaps now returns a polygon that has been simplified via the rmapshaper package. This should improve plotting performance. Set simplify = FALSE if you want to maintain the original gshhg shorelines.")
-    
     this_extract <- rmapshaper::ms_simplify(this_extract,
                                             keep = 0.2,
                                             keep_shapes = TRUE,
@@ -52,11 +68,10 @@ extract_gshhg <- function(xlims,ylims,
 
 #' @rdname extract_gshhg
 #' @export
-bering <- function(xlims = c(180 - 50,180 + 55),
-                   ylims = c(35,80), resolution = "i",
-                   epsg = 3571, simplify = TRUE) {
-  extract_gshhg(xlims = xlims,
-                ylims = ylims, 
+bering <- function(resolution = "i",
+                   epsg = 3571,
+                   simplify = FALSE) {
+  extract_gshhg(data = ptolemy::bering_bbox, 
                 resolution = resolution,
                 epsg = epsg,
                 simplify = simplify)
@@ -69,11 +84,9 @@ bering <- function(xlims = c(180 - 50,180 + 55),
 #' 
 #' @rdname extract_gshhg
 #' @export
-alaska <- function(xlims = c(180 - 5,180 + 50),
-                   ylims = c(35,68), resolution = "i",
-                   epsg = 3338, simplify = TRUE) {
-  extract_gshhg(xlims = xlims,
-                ylims = ylims, 
+alaska <- function(resolution = "i",
+                   epsg = 3338, simplify = FALSE) {
+  extract_gshhg(data = ptolemy::alaska_bbox,
                 resolution = resolution,
                 epsg = epsg,
                 simplify = simplify)
@@ -88,11 +101,9 @@ alaska <- function(xlims = c(180 - 5,180 + 50),
 #' 
 #' @rdname extract_gshhg
 #' @export
-us_arctic <- function(xlims = c(180 - 2,180 + 50),
-                      ylims = c(60,90), resolution = "i",
-                      epsg = 3572, simplify = TRUE) {
-  extract_gshhg(xlims = xlims,
-                ylims = ylims, 
+us_arctic <- function(resolution = "i",
+                      epsg = 3572, simplify = FALSE) {
+  extract_gshhg(data = ptolemy::us_arctic_bbox, 
                 resolution = resolution,
                 epsg = epsg,
                 simplify = simplify)
@@ -106,11 +117,9 @@ us_arctic <- function(xlims = c(180 - 2,180 + 50),
 #' 
 #' @rdname extract_gshhg
 #' @export
-npac <- function(xlims = c(180 - 50,180 + 70),
-                 ylims = c(20,67), resolution = "i",
-                 epsg = 3832, simplify = TRUE) {
-  extract_gshhg(xlims = xlims,
-                ylims = ylims, 
+npac <- function(resolution = "i",
+                 epsg = 3832, simplify = FALSE) {
+  extract_gshhg(data = ptolemy::npac_bbox, 
                 resolution = resolution,
                 epsg = epsg,simplify = simplify)
 }
@@ -124,11 +133,9 @@ npac <- function(xlims = c(180 - 50,180 + 70),
 #' 
 #' @rdname extract_gshhg
 #' @export
-calcur <- function(xlims = c(180 + 35,180 + 70),
-                   ylims = c(26,52), resolution = "i",
-                   epsg = 3310, simplify = TRUE) {
-  extract_gshhg(xlims = xlims,
-                ylims = ylims, 
+calcur <- function(resolution = "i",
+                   epsg = 3310, simplify = FALSE) {
+  extract_gshhg(data = ptolemy::calcur_bbox,
                 resolution = resolution,
                 epsg = epsg, simplify = simplify)
 }

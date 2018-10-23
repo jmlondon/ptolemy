@@ -1,17 +1,19 @@
-Package: nPacMaps
+Package: ptolemy
 Maintainer: Josh M London <josh.london@noaa.gov>
 License: CC0 | file LICENSE
-Title: North Pacific Maps
+Title: an R package for accessing global high-resolution geography
 Type: Package
 LazyData: true
 Authors@R: "Josh M London <josh.london@noaa.gov> [aut, cre]"
 Description: This package contains functions for creating basemap polygons
-    for the North Pacific based on data from the Global Self-consistent,
-    Hierarchical, High-resolution Geography (GSHHG) database. A separate
+    for based on data from the Global Self-consistent,
+    Hierarchical, High-resolution Geography (GSHHG) database. Convenience 
+    functions are provided for regions specific to the North Pacific. A separate
     download of the GSHHG binary files from
     https://www.ngdc.noaa.gov/mgg/shorelines/data/gshhg/latest/ is required.
-Version: 2.5
-Date: 2018-05-01
+Version: 1.0
+Date: 2018-10-24
+Encoding: UTF-8
 Depends:
     PBSmapping,
     maptools
@@ -23,4 +25,4 @@ Imports:
     ggplot2,
     broom,
     marmap
-RoxygenNote: 6.0.1
+RoxygenNote: 6.1.0
