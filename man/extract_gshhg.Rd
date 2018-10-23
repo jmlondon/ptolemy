@@ -9,39 +9,32 @@
 \alias{calcur}
 \title{Extract Region from GSHHG}
 \usage{
-extract_gshhg(xlims, ylims, resolution = "i", epsg, fortify = TRUE,
-  sf = FALSE)
+extract_gshhg(data, resolution = "i", epsg = NULL, buffer = 5000,
+  simplify = FALSE)
 
-bering(xlims = c(180 - 50, 180 + 55), ylims = c(35, 80), resolution = "i",
-  epsg = "3571", fortify = TRUE)
+bering(resolution = "i", epsg = 3571, simplify = FALSE)
 
-alaska(xlims = c(180 - 5, 180 + 50), ylims = c(35, 75), resolution = "i",
-  epsg = "3338", fortify = TRUE)
+alaska(resolution = "i", epsg = 3338, simplify = FALSE)
 
-us_arctic(xlims = c(180 - 2, 180 + 50), ylims = c(60, 90),
-  resolution = "i", epsg = "3572", fortify = TRUE)
+us_arctic(resolution = "i", epsg = 3572, simplify = FALSE)
 
-npac(xlims = c(180 - 50, 180 + 70), ylims = c(20, 67), resolution = "i",
-  epsg = "3832", fortify = TRUE)
+npac(resolution = "i", epsg = 3832, simplify = FALSE)
 
-calcur(xlims = c(180 + 35, 180 + 70), ylims = c(26, 52), resolution = "i",
-  epsg = "3310", fortify = TRUE)
+calcur(resolution = "i", epsg = 3310, simplify = FALSE)
 }
 \arguments{
-\item{xlims}{a vector of x coordinate limits; 0-360 degrees in most cases. When straddling 0, pass -longitude values (up to -180) for the left side.}
-
-\item{ylims}{a vector of y coordinate limits: 0-90 degrees}
+\item{data}{an sf object that defines that area of interest}
 
 \item{resolution}{either "f", "h", "i", or "c"}
 
-\item{epsg}{character indicating the numeric epsg value (e.g. "3571")}
+\item{epsg}{integer indicating the numeric epsg value (e.g. 3571)}
 
-\item{fortify}{TRUE/FALSE whether to return a fortified data.frame for ggplot (now relies on broom::tidy instead of ggplot2::fortify())}
+\item{buffer}{integer indicating a value in projected units to buffer data}
 
-\item{sf}{TRUE/FALSE whether to return and sf (simple features) object}
+\item{simplify}{TRUE/FALSE whether to call rmapshaper::ms_simplify}
 }
 \description{
-Functions to extract specified N. Pacific regions from the GSHHG dataset
+Functions to extract specified regions from the GSHHG dataset
 
 This map region is centered on the Bering Sea. Coordinates are returned in 
 the Lambert-Azimuthal Equal Area Bering Sea Projection (epsg:3571)

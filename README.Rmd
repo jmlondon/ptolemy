@@ -12,47 +12,49 @@ knitr::opts_chunk$set(
 )
 ```
 
-# nPacMaps: an R package for North Pacific basemap data
+# ptolemy: an R package for accessing global high-resolution geography
 
 ## About
 
-Creating maps for the North Pacific can be difficult, frustrating, and confusing.
-The main source of this frustration is the 180 longitude line and the limited
-examples that exist for guidance. This R package relies on data from the [Global 
-Self-consistent, Hierarchical, High-resolution Geography (GSHHG) Database](https://www.ngdc.noaa.gov/mgg/shorelines/data/gshhg/latest/).
+This package was formerly known as `nPacMaps`. This R package relies on data downloaded
+from the [Global Self-consistent, Hierarchical, High-resolution Geography (GSHHG) Database](https://www.ngdc.noaa.gov/mgg/shorelines/data/gshhg/latest/). More
+details on the GSHHG can be found on this [website from the University of
+Hawaii](http://www.soest.hawaii.edu/wessel/gshhg/)
 
-The main objective is to provide a simple interface for quickly loading basemap
-polygon land data for the North Pacific Region that can be used in the
-ggplot2 graphical ecosystem.
+The main objective is to provide a simple interface for loading basemap
+polygon land data for the North Pacific region that can be used in the
+`sf` and `ggplot2` R package ecosystem. There are a variety of pre-described
+regions that are loaded with convenience functions. However, most regions of
+the world are supported and custom extractions are possible with `extract_gshhg()`.
 
-This package is under active development and functionality is subject to change
+This package is under development and functionality is subject to change
 and improvement at anytime.
 
 ## Installation
 
-The nPacMaps package is not available on CRAN and must be installed via the
+The ptolemy package is not available on CRAN and must be installed via the
 `devtools::install_github()` function.
 
 ```{r, install-code, eval=FALSE}
 install.packages("devtools")
-devtools::install_github('jmlondon/npacmaps')
-```
-
-A cutting-edge 'develop' branch is also available. Proceed with caution.
-
-```{r, install-code-develop, eval=FALSE}
-install.packages("devtools")
-devtools::install_github('jmlondon/npacmaps',ref='develop')
+devtools::install_github('jmlondon/ptolemy')
 ```
 
 After successfully installing the package from GitHub, you will need to download
-and install the GSHGG data. This is handled via the `nPacMaps::install_gshhg()`
-function.
+and install the GSHGG data. This is handled via the `ptolemy::install_gshhg()`
+function. If you are not prompted, you may need to run `ptolemy::install_gsggh()`
+before using the package.
 
 ```{r, install-gshgg, eval=FALSE}
-library(nPacMaps)
+library(ptolemy)
 install_gshhg()
 ```
+
+## Data for Specifying the Geographic Region
+
+The `data` parameter should be an `sf` object representing the region of interest.
+This can be data points, polygons, lines and should be projected. If the data
+are provided in longlat, an *epsg* parameter code is required.
 
 ## Resolution
 
@@ -71,13 +73,27 @@ suffice for most applications. The default resolution can be overided via the
 extraction and drawing time. If you require the **f**ull resolution frequently, 
 creating a custom region via `extract_gshhg()` should be considered.
 
-## Projections
+## ESPG / Projection
 
-All of the returned maps are provide with projected coordinates in a default
-projection chosen for each region. In most cases, the default projections
+All of the returned maps are provide with projected coordinates based on the 
+`epsg` parameter provided. For the pre-built regions, the default projections
 are sensible and all users need to do is insure all other data is transformed
-to the same projection. A custom projection can be provided by specifying the 
-corresponding epsg integer value to the `epsg` parameter.
+to the same projection. A custom projection can be provided.
+
+## Buffer
+
+The returned map region will be slightly larger than the area of interest
+represented by the provided data. The default is 10000 meters.
+
+## Simplified for Improved Performance
+
+The `rmapshaper::ms_simplify` function can applied to the returned objects to 
+improve performance. The function is set to return 20% of the original points 
+and to preserve small shapes (i.e. small islands and other features). This 
+improves performance for plotting and should suffice for most users. However, 
+the original integrity of the GSHHG data will be changed. Uses for analytical 
+purposes (e.g. calculating distance to shoreline, least-cost path creation 
+around land) should not use this option without consideration of impacts.
 
 ## geom_sf for ggplot2
 
@@ -85,26 +101,16 @@ By default all of the basemap objects are returned as an `sf` object. ggplot2
 now offers native support for plotting `sf` objects via the `geom_sf`. The 
 examples below demonstrate basic use of `geom_sf`.
 
-## Simplified for Improved Performance
-
-The `rmapshaper::ms_simplify` function is applied to the returned objects by default. 
-The function is set to return 20% of the original points and to preserve small shapes (i.e. small islands and other features). This improves performance for plotting and should suffice for most users. However, the original integrity of the GSHHG data will be changed. Any uses of `nPacMaps` for analytical purposes (e.g. calculating distance to shoreline, least-cost path creation around land) should consider whether passing `simplify=FALSE` would be more appropriate.
-
-## Additional Utility Functions
-
-The package previously included two additional utility functions: `to_km()` and 
-`ggExpansion()`. These have been deprecated.
-
 ## Examples
 
 ### North Pacific Basemap
 
 ```{r, npac-example}
 library(ggplot2)
-library(nPacMaps)
+library(ptolemy)
 library(sf)
 
-npac_base <- nPacMaps::npac()
+npac_base <- ptolemy::npac()
 
 npac_plot <- ggplot() + 
   geom_sf(data = npac_base,
@@ -117,10 +123,10 @@ npac_plot
 
 ```{r, calcur-example}
 library(ggplot2)
-library(nPacMaps)
+library(ptolemy)
 library(sf)
 
-calcur_base <- nPacMaps::calcur()
+calcur_base <- ptolemy::calcur()
 
 calcur_plot <- ggplot() + 
   geom_sf(data = calcur_base,
@@ -133,10 +139,10 @@ calcur_plot
 
 ```{r, bering-example}
 library(ggplot2)
-library(nPacMaps)
+library(ptolemy)
 library(sf)
 
-bering_base <- nPacMaps::bering()
+bering_base <- ptolemy::bering()
 
 bering_plot <- ggplot() + 
   geom_sf(data = bering_base,
@@ -149,10 +155,10 @@ bering_plot
 
 ```{r, us-arctic-example}
 library(ggplot2)
-library(nPacMaps)
+library(ptolemy)
 library(sf)
 
-us_arctic_base <- nPacMaps::us_arctic()
+us_arctic_base <- ptolemy::us_arctic()
 
 us_arctic_plot <- ggplot() + 
   geom_sf(data = us_arctic_base,
@@ -165,10 +171,10 @@ us_arctic_plot
 
 ```{r, ak-example}
 library(ggplot2)
-library(nPacMaps)
+library(ptolemy)
 library(sf)
 
-ak_base <- nPacMaps::alaska()
+ak_base <- ptolemy::alaska()
 
 ak_plot <- ggplot() + 
   geom_sf(data = ak_base,
@@ -181,7 +187,7 @@ We can also zoom in on a particular region
 
 ```{r, ak-example-zoom}
 library(ggplot2)
-library(nPacMaps)
+library(ptolemy)
 library(crawl)
 library(dplyr)
 library(sf)
@@ -195,23 +201,20 @@ harborSeal <- harborSeal %>%
   sf::st_set_crs(4326) %>% 
   sf::st_transform(3338)
 
-b <- sf::st_bbox(harborSeal)
-b
 
-ak_base <- nPacMaps::alaska(resolution = "f")
+map_base <- ptolemy::extract_gshhg(data = harborSeal)
 
 ak_plot <- ggplot() + 
-  geom_sf(data = ak_base,
+  geom_sf(data = map_base,
                fill = "grey60", size = 0.2) +
   geom_sf(data = harborSeal,
-             alpha = 0.1, color = 'blue') +
-  coord_sf(xlim = c(b["xmin"], b["xmax"]), ylim = c(b["ymin"], b["ymax"]))
+             alpha = 0.1, color = 'blue') 
 ak_plot
 ```
 
 *************************************************
 
-#####Disclaimer
+##### Disclaimer
 
 <sub>This repository is a scientific product and is not official communication of the Alaska Fisheries Science Center, the National Oceanic and Atmospheric Administration, or the United States Department of Commerce. All AFSC Marine Mammal Laboratory (AFSC-MML) GitHub project code is provided on an ‘as is’ basis and the user assumes responsibility for its use. AFSC-MML has relinquished control of the information and no longer has responsibility to protect the integrity, confidentiality, or availability of the information. Any claims against the Department of Commerce or Department of Commerce bureaus stemming from the use of this GitHub project will be governed by all applicable Federal law. Any reference to specific commercial products, processes, or services by service mark, trademark, manufacturer, or otherwise, does not constitute or imply their endorsement, recommendation or favoring by the Department of Commerce. The Department of Commerce seal and logo, or the seal and logo of a DOC bureau, shall not be used in any manner to imply endorsement of any commercial product or activity by DOC or the United States Government.</sub>
 
