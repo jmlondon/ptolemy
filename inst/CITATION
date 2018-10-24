@@ -9,7 +9,8 @@ citEntry(entry = "Misc",
   textVersion =
   paste("London, Josh M.",
         "ptolemy: an R package for accessing global high-resolution geography",
-        "2018. Version 1.0.0. https://github.com/jmlondon/ptolemy")
+        "2018. Version 1.0.0. https://github.com/jmlondon/ptolemy.",
+        "10.5281/zenodo.1470707")
 )
 
 citEntry(entry = "Article",
