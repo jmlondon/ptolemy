@@ -3,7 +3,7 @@
 
 # ptolemy: an R package for accessing global high-resolution geography
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.1470707.svg)](https://doi.org/10.5281/zenodo.1470707)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.1470706.svg)](https://doi.org/10.5281/zenodo.1470706)
 
 ## About
 
@@ -29,7 +29,7 @@ Please cite this package as:
 
 > London, Josh M. ptolemy: an R package for accessing global
 > high-resolution geography. 2018. Version 1.0.0.
-> <https://github.com/jmlondon/ptolemy>. 10.5281/zenodo.1470707
+> <https://github.com/jmlondon/ptolemy>. 10.5281/zenodo.1470706
 
 and, also cite the GSHHG dataset:
 
