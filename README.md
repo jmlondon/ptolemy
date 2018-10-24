@@ -3,6 +3,8 @@
 
 # ptolemy: an R package for accessing global high-resolution geography
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.1470707.svg)](https://doi.org/10.5281/zenodo.1470707)
+
 ## About
 
 This package was formerly known as `nPacMaps`. This R package relies on
@@ -10,7 +12,8 @@ data downloaded from the [Global Self-consistent, Hierarchical,
 High-resolution Geography (GSHHG)
 Database](https://www.ngdc.noaa.gov/mgg/shorelines/data/gshhg/latest/).
 More details on the GSHHG can be found on this [website from the
-University of Hawaii](http://www.soest.hawaii.edu/wessel/gshhg/)
+University of Hawaii](http://www.soest.hawaii.edu/wessel/gshhg/). The
+current version supported in this package is 2.3.7 (July, 2017).
 
 The main objective is to provide a simple interface for loading basemap
 polygon land data for the North Pacific region that can be used in the
@@ -96,6 +99,17 @@ use this option without consideration of impacts.
 By default all of the basemap objects are returned as an `sf` object.
 ggplot2 now offers native support for plotting `sf` objects via the
 `geom_sf`. The examples below demonstrate basic use of `geom_sf`.
+
+## Acknowledgements
+
+This package relies heavily on the works of other researchers and
+developers. The GSHHG dataset is developed and maintained by Paul Wessel
+(SOEST, University of Hawai’i, Honolulu, HI) and Walter H. F. Smith
+(NOAA Geosciences Lab, National Ocean Service, Silver Spring, MD). The
+package also relies on code developed as part of the `PBSmapping`
+package (Jon T. Schnute, Nicholas Boers and Rowan Haigh (2018).
+PBSmapping: Mapping Fisheries Data and Spatial Analysis Tools. R package
+version 2.70.5. <https://CRAN.R-project.org/package=PBSmapping>.)
 
 ## Examples
 
