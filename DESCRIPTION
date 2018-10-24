@@ -6,18 +6,28 @@ Type: Package
 LazyData: true
 Authors@R: "Josh M London <josh.london@noaa.gov> [aut, cre]"
 Description: This package contains functions for creating basemap polygons
-    for based on data from the Global Self-consistent,
-    Hierarchical, High-resolution Geography (GSHHG) database. Convenience 
-    functions are provided for regions specific to the North Pacific. A separate
-    download of the GSHHG binary files from
-    https://www.ngdc.noaa.gov/mgg/shorelines/data/gshhg/latest/ is required.
+    based on data from the Global Self-consistent, Hierarchical, High-resolution 
+    Geography (GSHHG) database. Convenience functions are provided for regions 
+    specific to the North Pacific. Special care has been taken to address issues
+    that sometimes arise when workin with data that crosses the 180 meridian.
+    A separate download of the GSHHG binary files from
+    https://www.ngdc.noaa.gov/mgg/shorelines/data/gshhg/latest/ is required and
+    should be installed via the included install_gshhg() function. Special
+    thanks to Paul Wessel (SOEST, University of Hawai'i, Honolulu, HI) and 
+    Walter H. F. Smith (NOAA Geosciences Lab, National Ocean Service, Silver 
+    Spring, MD) for there dedication and maintenance of the GSHHG. Please cite
+    their work if you use this package in a publication.
 Version: 1.0.0
 Date: 2018-10-24
+URL: https://github.com/jmlondon/ptolemy
+BugReports: https://github.com/jmlondon/ptolemy/issues
 Encoding: UTF-8
 Depends:
 Imports:
-    PBSmapping,
     sf,
+    sp,
+    PBSmapping,
+    maptools,
     rmapshaper,
     magrittr
 Suggests:

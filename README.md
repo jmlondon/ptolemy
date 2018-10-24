@@ -103,35 +103,11 @@ ggplot2 now offers native support for plotting `sf` objects via the
 
 ``` r
 library(ggplot2)
-library(nPacMaps)
-#> Loading required package: PBSmapping
-#> 
-#> -----------------------------------------------------------
-#> PBS Mapping 2.70.5 -- Copyright (C) 2003-2018 Fisheries and Oceans Canada
-#> 
-#> PBS Mapping comes with ABSOLUTELY NO WARRANTY;
-#> for details see the file COPYING.
-#> This is free software, and you are welcome to redistribute
-#> it under certain conditions, as outlined in the above file.
-#> 
-#> A complete user guide 'PBSmapping-UG.pdf' is located at 
-#> /Users/josh.london/Library/R/3.5/library/PBSmapping/doc/PBSmapping-UG.pdf
-#> 
-#> Packaged on 2018-06-05
-#> Pacific Biological Station, Nanaimo
-#> 
-#> All available PBS packages can be found at
-#> https://github.com/pbs-software
-#> 
-#> To see demos, type '.PBSfigs()'.
-#> -----------------------------------------------------------
-#> Loading required package: maptools
-#> Loading required package: sp
-#> Checking rgeos availability: TRUE
+library(ptolemy)
 library(sf)
 #> Linking to GEOS 3.6.2, GDAL 2.3.0, PROJ 5.1.0
 
-npac_base <- nPacMaps::npac()
+npac_base <- ptolemy::npac()
 #> importGSHHS status:
 #> --> Pass 1: complete: 15631 bounding boxes within limits.
 #> --> Pass 2: complete.
@@ -155,10 +131,10 @@ npac_plot
 
 ``` r
 library(ggplot2)
-library(nPacMaps)
+library(ptolemy)
 library(sf)
 
-calcur_base <- nPacMaps::calcur()
+calcur_base <- ptolemy::calcur()
 #> importGSHHS status:
 #> --> Pass 1: complete: 5028 bounding boxes within limits.
 #> --> Pass 2: complete.
@@ -182,10 +158,10 @@ calcur_plot
 
 ``` r
 library(ggplot2)
-library(nPacMaps)
+library(ptolemy)
 library(sf)
 
-bering_base <- nPacMaps::bering()
+bering_base <- ptolemy::bering()
 #> importGSHHS status:
 #> --> Pass 1: complete: 13265 bounding boxes within limits.
 #> --> Pass 2: complete.
@@ -209,10 +185,10 @@ bering_plot
 
 ``` r
 library(ggplot2)
-library(nPacMaps)
+library(ptolemy)
 library(sf)
 
-us_arctic_base <- nPacMaps::us_arctic()
+us_arctic_base <- ptolemy::us_arctic()
 #> importGSHHS status:
 #> --> Pass 1: complete: 9256 bounding boxes within limits.
 #> --> Pass 2: complete.
@@ -236,10 +212,10 @@ us_arctic_plot
 
 ``` r
 library(ggplot2)
-library(nPacMaps)
+library(ptolemy)
 library(sf)
 
-ak_base <- nPacMaps::alaska()
+ak_base <- ptolemy::alaska()
 #> importGSHHS status:
 #> --> Pass 1: complete: 10988 bounding boxes within limits.
 #> --> Pass 2: complete.
@@ -263,7 +239,7 @@ We can also zoom in on a particular region
 
 ``` r
 library(ggplot2)
-library(nPacMaps)
+library(ptolemy)
 library(crawl)
 #> crawl 2.2.2 (2018-09-17) 
 #>  Demos and documentation can be found at our new GitHub repository:
@@ -289,7 +265,7 @@ harborSeal <- harborSeal %>%
   sf::st_transform(3338)
 
 
-map_base <- nPacMaps::extract_gshhg(data = harborSeal)
+map_base <- ptolemy::extract_gshhg(data = harborSeal)
 #> importGSHHS status:
 #> --> Pass 1: complete: 2198 bounding boxes within limits.
 #> --> Pass 2: complete.

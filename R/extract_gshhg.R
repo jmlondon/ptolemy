@@ -9,6 +9,8 @@
 #' @param simplify TRUE/FALSE whether to call rmapshaper::ms_simplify
 #'
 #' @return NULL
+#' @importFrom PBSmapping importGSHHS refocusWorld clipPolys
+#' @importFrom maptools PolySet2SpatialPolygons
 #' @export
 #'
 extract_gshhg <- function(data,

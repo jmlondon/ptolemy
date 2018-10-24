@@ -1,0 +1,28 @@
+citHeader("To cite 'ptolemy' in publications please reference both:")
+
+citEntry(entry = "Misc",
+  title        = "{ptolemy}: an R package for accessing global high-resolution geography",
+  author       = personList(as.person("Josh London")),
+  year         = "2018",
+  url          = "https://github.com/jmlondon/ptolemy",
+  version      = "1.0.0",
+  textVersion =
+  paste("London, Josh M.",
+        "ptolemy: an R package for accessing global high-resolution geography",
+        "2018. Version 1.0.0. https://github.com/jmlondon/ptolemy")
+)
+
+citEntry(entry = "Article",
+  title = "A Global Self-consistent, Hierarchical, High-resolution Shoreline Database",
+  author = personList(as.person("Paul Wessel"),
+                      as.person("Walter Smith")),
+  journal = "J. Geophys. Res.",
+  volume = "101",
+  pages = "8741-8743",
+  year = "1996",
+  url = "http://www.soest.hawaii.edu/wessel/gshhg/",
+  textVersion =
+  paste("Wessel, P., and W. H. F. Smith",
+        "A Global Self-consistent, Hierarchical, High-resolution Shoreline Database",
+        "J. Geophys. Res., 101, 8741-8743, 1996")
+)

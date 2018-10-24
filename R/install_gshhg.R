@@ -1,4 +1,8 @@
 #' Download and Install GSHHG Binary Data
+#' 
+#' This is a function for downloading and installing the latest version of the
+#' GSHHG binary dataset. Current version supported is 2.3.7. This only needs
+#' to be run once after the package is installed. 
 #'
 #' @return NULL
 #' @export
