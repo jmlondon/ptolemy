@@ -33,6 +33,14 @@ the world are supported and custom extractions are possible with `extract_gshhg(
 This package is under development and functionality is subject to change
 and improvement at anytime.
 
+Please cite this package as:
+
+> London, Josh M. ptolemy: an R package for accessing global high-resolution geography. 2018. Version 1.0.0. https://github.com/jmlondon/ptolemy. 10.5281/zenodo.1470707
+
+and, also cite the GSHHG dataset:
+
+> Wessel, P., and W. H. F. Smith. A Global Self-consistent, Hierarchical, High-resolution Shoreline Database. J. Geophys. Res., 101, 8741-8743, 1996.
+
 ## Installation
 
 The ptolemy package is not available on CRAN and must be installed via the
@@ -86,7 +94,7 @@ to the same projection. A custom projection can be provided.
 ## Buffer
 
 The returned map region will be slightly larger than the area of interest
-represented by the provided data. The default is 10000 meters.
+represented by the provided data. The default is 5000 meters.
 
 ## Simplified for Improved Performance
 
