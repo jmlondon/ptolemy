@@ -1,4 +1,9 @@
-# ptolemy 1.0
+# ptolemy 1.0.1
+
+* There were some leftover references to nPacMaps that prevented install. These
+were removed and replaced with references to the new pkg name, ptolemy
+
+# ptolemy 1.0.0
 
 * Added a `NEWS.md` file to track changes to the package.
 * Renamed the package from "nPacMaps" to "ptolemy"
