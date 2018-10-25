@@ -8,10 +8,10 @@
 #' @export
 #'
 install_gshhg <- function() {
-  if (!dir.exists(system.file("extData", package = "nPacMaps"))) {
-    dir.create(system.file("extData", package = "nPacMaps"))
+  if (!dir.exists(system.file("extData", package = "ptolemy"))) {
+    dir.create(system.file("extData", package = "ptolemy"))
   }
-  data_path <- system.file("extData", package = "nPacMaps")
+  data_path <- system.file("extData", package = "ptolemy")
   
   if (!file.exists(paste(data_path, "gshhg-bin-2.3.7", sep = "/"))) {
     cont <- readline(
