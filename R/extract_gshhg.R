@@ -27,7 +27,7 @@ extract_gshhg <- function(data,
     }
     epsg <- sf::st_crs(data)
   }
-  dir_path <- system.file("extData", package = "nPacMaps")
+  dir_path <- system.file("extData", package = "ptolemy")
   file_name <- paste0("gshhs_",resolution,".b")
   gshhg_path <- paste(dir_path, "gshhg-bin-2.3.7", file_name, sep = "/")
   
