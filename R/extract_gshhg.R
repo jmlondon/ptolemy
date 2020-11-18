@@ -6,7 +6,6 @@
 #' @param resolution either "f", "h", "i", or "c"
 #' @param epsg integer indicating the numeric epsg value (e.g. 3571)
 #' @param buffer integer indicating a value in projected units to buffer data
-#' @param simplify TRUE/FALSE whether to call rmapshaper::ms_simplify
 #'
 #' @return NULL
 #' @importFrom PBSmapping importGSHHS refocusWorld clipPolys
@@ -16,8 +15,7 @@
 extract_gshhg <- function(data,
                           resolution = "i", 
                           epsg = NULL,
-                          buffer = 5000,
-                          simplify = FALSE) {
+                          buffer = 5000) {
   if (is.null(epsg)) {
     if (is.null(sf::st_crs(data))) {
       stop("epsg value not provided and cannot be determined from data")
@@ -54,12 +52,6 @@ extract_gshhg <- function(data,
     sf::st_buffer(0) %>% 
     sf::st_transform(epsg)
   
-  if (simplify) {
-    this_extract <- rmapshaper::ms_simplify(this_extract,
-                                            keep = 0.2,
-                                            keep_shapes = TRUE,
-                                            explode = TRUE)
-  }
   return(this_extract)
 }
 
@@ -71,12 +63,10 @@ extract_gshhg <- function(data,
 #' @rdname extract_gshhg
 #' @export
 bering <- function(resolution = "i",
-                   epsg = 3571,
-                   simplify = FALSE) {
+                   epsg = 3571) {
   extract_gshhg(data = ptolemy::bering_bbox, 
                 resolution = resolution,
-                epsg = epsg,
-                simplify = simplify)
+                epsg = epsg)
 }
 
 #' Alaska Map Region
@@ -87,11 +77,10 @@ bering <- function(resolution = "i",
 #' @rdname extract_gshhg
 #' @export
 alaska <- function(resolution = "i",
-                   epsg = 3338, simplify = FALSE) {
+                   epsg = 3338) {
   extract_gshhg(data = ptolemy::alaska_bbox,
                 resolution = resolution,
-                epsg = epsg,
-                simplify = simplify)
+                epsg = epsg)
 }
 
 #' US Arctic Map Region
@@ -104,11 +93,10 @@ alaska <- function(resolution = "i",
 #' @rdname extract_gshhg
 #' @export
 us_arctic <- function(resolution = "i",
-                      epsg = 3572, simplify = FALSE) {
+                      epsg = 3572) {
   extract_gshhg(data = ptolemy::us_arctic_bbox, 
                 resolution = resolution,
-                epsg = epsg,
-                simplify = simplify)
+                epsg = epsg)
 }
 
 #' North Pacific Map Region
@@ -120,10 +108,10 @@ us_arctic <- function(resolution = "i",
 #' @rdname extract_gshhg
 #' @export
 npac <- function(resolution = "i",
-                 epsg = 3832, simplify = FALSE) {
+                 epsg = 3832) {
   extract_gshhg(data = ptolemy::npac_bbox, 
                 resolution = resolution,
-                epsg = epsg,simplify = simplify)
+                epsg = epsg)
 }
 
 #' California Current Map Region
@@ -136,8 +124,8 @@ npac <- function(resolution = "i",
 #' @rdname extract_gshhg
 #' @export
 calcur <- function(resolution = "i",
-                   epsg = 3310, simplify = FALSE) {
+                   epsg = 3310) {
   extract_gshhg(data = ptolemy::calcur_bbox,
                 resolution = resolution,
-                epsg = epsg, simplify = simplify)
+                epsg = epsg)
 }
