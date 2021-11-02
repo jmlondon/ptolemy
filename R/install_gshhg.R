@@ -16,17 +16,21 @@ install_gshhg <- function() {
   if (!file.exists(paste(data_path, "gshhg-bin-2.3.7", sep = "/"))) {
     cont <- readline(
       prompt = "Download and install source gshhg data (Y,n)? "
-      )
+    )
     if (cont == "Y") {
+      op <- getOption("timeout")
+      options(timeout = max(600, getOption("timeout")))
       tmp <- tempfile(fileext = ".zip")
       download.file(
         "https://www.ngdc.noaa.gov/mgg/shorelines/data/gshhg/latest/gshhg-bin-2.3.7.zip",
-                    tmp)
+        tmp
+      )
       unzip(tmp, 
             exdir = paste(data_path, 
                           "gshhg-bin-2.3.7", 
                           sep = "/"))
       unlink(tmp)
+      options(timeout = op)
     } else if (cont == "n") {
       message("Source data will not be downloaded")
     } else {
