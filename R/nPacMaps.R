@@ -1,5 +1,6 @@
 #' ptolemy: an R package for accessing global high-resolution geography
 #'
+#' @description Provides easy access to the GSHHG data base of coastline data from NOAA.
 #' @docType package
 #' @name ptolemy
 NULL

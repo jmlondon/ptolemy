@@ -32,4 +32,4 @@ Imports:
     magrittr
 Suggests:
     ggplot2
-RoxygenNote: 6.1.0
+RoxygenNote: 7.1.2

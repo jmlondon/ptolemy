@@ -7,6 +7,7 @@
 #' @param epsg integer indicating the numeric epsg value (e.g. 3571)
 #' @param buffer integer indicating a value in projected units to buffer data
 #' @param simplify TRUE/FALSE whether to call rmapshaper::ms_simplify
+#' @param warn TRUE/FALSE turn off projection warnings given by spatial functions. These warnings can generally be ignored.
 #'
 #' @return NULL
 #' @importFrom PBSmapping importGSHHS refocusWorld clipPolys
@@ -164,4 +165,15 @@ hawaii <- function(resolution = "i",
                 resolution = resolution,
                 epsg = epsg, simplify = simplify)
 }
+
+
+
+#' This is data to be included in my package
+#'
+#' @name Bounding box data
+#' @docType data
+#' @description Spatial bounding boxes used for extracting specific geographic reagional data. 
+#' @keywords data
+#' @aliases alaska_bbox bering_bbox calcur_bbox hawaii_bbox npac_bbox us_arctic_bbox
+NULL
 

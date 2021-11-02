@@ -5,6 +5,7 @@
 #' to be run once after the package is installed. 
 #'
 #' @return NULL
+#' @importFrom utils download.file unzip 
 #' @export
 #'
 install_gshhg <- function() {
