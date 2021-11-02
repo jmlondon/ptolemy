@@ -3,8 +3,7 @@
 \docType{package}
 \name{ptolemy}
 \alias{ptolemy}
-\alias{ptolemy-package}
 \title{ptolemy: an R package for accessing global high-resolution geography}
 \description{
-ptolemy: an R package for accessing global high-resolution geography
+Provides easy access to the GSHHG data base of coastline data from NOAA.
 }

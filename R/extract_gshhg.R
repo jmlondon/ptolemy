@@ -7,6 +7,7 @@
 #' @param epsg integer indicating the numeric epsg value (e.g. 3571)
 #' @param buffer integer indicating a value in projected units to buffer data
 #' @param simplify TRUE/FALSE whether to call rmapshaper::ms_simplify
+#' @param warn TRUE/FALSE turn off projection warnings given by spatial functions. These warnings can generally be ignored.
 #'
 #' @return NULL
 #' @importFrom PBSmapping importGSHHS refocusWorld clipPolys
@@ -17,7 +18,12 @@ extract_gshhg <- function(data,
                           resolution = "i", 
                           epsg = NULL,
                           buffer = 5000,
-                          simplify = FALSE) {
+                          simplify = FALSE,
+                          warn=FALSE) {
+  if(!warn){
+    op_warn <- getOption('warn')
+    options(warn=-1)
+  }
   if (is.null(epsg)) {
     if (is.null(sf::st_crs(data))) {
       stop("epsg value not provided and cannot be determined from data")
@@ -38,20 +44,21 @@ extract_gshhg <- function(data,
     sf::st_buffer(buffer) %>% sf::st_transform(4326)
   
   data_360 <- (sf::st_geometry(data_buffer) + c(360,90)) %% c(360) - c(0,90)
-
+  
   bbox <- sf::st_bbox(data_360)
   xlim <- c(0,360)
   ylim <- c(bbox$ymin,bbox$ymax)
   
-  this_extract <- PBSmapping::importGSHHS(gshhg_path,xlim = xlim, 
-                                         ylim = ylim, n = 1,
-                                         maxLevel = 1)
+  this_extract <- suppressMessages(PBSmapping::importGSHHS(gshhg_path,xlim = xlim, 
+                                          ylim = ylim, n = 1,
+                                          maxLevel = 1))
+  
   xlim <- c(bbox$xmin,bbox$xmax)
   this_extract <- PBSmapping::refocusWorld(this_extract,xlim = xlim, ylim = ylim)
   this_extract <- PBSmapping::clipPolys(this_extract,xlim = xlim, ylim = ylim)
   this_extract <- maptools::PolySet2SpatialPolygons(this_extract)
-  this_extract <- sf::st_as_sf(this_extract) %>% 
-    sf::st_buffer(0) %>% 
+  this_extract <- sf::st_as_sf(this_extract) %>% sf::st_make_valid() %>% 
+    # sf::st_buffer(0) %>% 
     sf::st_transform(epsg)
   
   if (simplify) {
@@ -60,6 +67,7 @@ extract_gshhg <- function(data,
                                             keep_shapes = TRUE,
                                             explode = TRUE)
   }
+  options(warn=op_warn)
   return(this_extract)
 }
 
@@ -141,3 +149,31 @@ calcur <- function(resolution = "i",
                 resolution = resolution,
                 epsg = epsg, simplify = simplify)
 }
+
+
+
+#' Hawaii Map Region
+#' 
+#' This map region covers the extent of Hawaii. Coordinates are returned in the
+#' WGS 84 / Pseudo-Mercator -- Spherical Mercator (epsg:3857)
+#' 
+#' @rdname extract_gshhg
+#' @export
+hawaii <- function(resolution = "i",
+                   epsg = 3857, simplify = FALSE) {
+  extract_gshhg(data = ptolemy::hawaii_bbox,
+                resolution = resolution,
+                epsg = epsg, simplify = simplify)
+}
+
+
+
+#' This is data to be included in my package
+#'
+#' @name Bounding box data
+#' @docType data
+#' @description Spatial bounding boxes used for extracting specific geographic reagional data. 
+#' @keywords data
+#' @aliases alaska_bbox bering_bbox calcur_bbox hawaii_bbox npac_bbox us_arctic_bbox
+NULL
+

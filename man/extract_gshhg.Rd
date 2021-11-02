@@ -7,10 +7,17 @@
 \alias{us_arctic}
 \alias{npac}
 \alias{calcur}
+\alias{hawaii}
 \title{Extract Region from GSHHG}
 \usage{
-extract_gshhg(data, resolution = "i", epsg = NULL, buffer = 5000,
-  simplify = FALSE)
+extract_gshhg(
+  data,
+  resolution = "i",
+  epsg = NULL,
+  buffer = 5000,
+  simplify = FALSE,
+  warn = FALSE
+)
 
 bering(resolution = "i", epsg = 3571, simplify = FALSE)
 
@@ -21,6 +28,8 @@ us_arctic(resolution = "i", epsg = 3572, simplify = FALSE)
 npac(resolution = "i", epsg = 3832, simplify = FALSE)
 
 calcur(resolution = "i", epsg = 3310, simplify = FALSE)
+
+hawaii(resolution = "i", epsg = 3857, simplify = FALSE)
 }
 \arguments{
 \item{data}{an sf object that defines that area of interest}
@@ -32,6 +41,8 @@ calcur(resolution = "i", epsg = 3310, simplify = FALSE)
 \item{buffer}{integer indicating a value in projected units to buffer data}
 
 \item{simplify}{TRUE/FALSE whether to call rmapshaper::ms_simplify}
+
+\item{warn}{TRUE/FALSE turn off projection warnings given by spatial functions. These warnings can generally be ignored.}
 }
 \description{
 Functions to extract specified regions from the GSHHG dataset
@@ -55,4 +66,7 @@ This map region covers the California current off of the west coast of the
 United States. The region extends from southern British Columbia, Canada to
 the Baja Peninsula of Mexico. Coordinates are returned in the California
 (Teale) Albers Projection (epsg:3310).
+
+This map region covers the extent of Hawaii. Coordinates are returned in the
+WGS 84 / Pseudo-Mercator -- Spherical Mercator (epsg:3857)
 }
